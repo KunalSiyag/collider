@@ -1,0 +1,123 @@
+---
+import type { ElementMeta } from '../../lib/registry';
+import { getSource } from '../../lib/sources';
+
+interface Props {
+  meta: ElementMeta;
+}
+
+const { meta } = Astro.props;
+---
+
+<a class="card" href={`/elements/${meta.slug}`}>
+  <div class="mini">
+    {
+      meta.kind === 'vector' ? (
+        <div class="mini-vector" set:html={getSource(meta.slug)} />
+      ) : (
+        <div class="mini-mount" data-collider={meta.slug} />
+      )
+    }
+  </div>
+  <div class="body">
+    <div class="title-row">
+      <h3>{meta.name}</h3>
+      <span class="kind">{meta.kind === 'three' ? 'WebGL' : 'SVG'}</span>
+    </div>
+    <p>{meta.description}</p>
+  </div>
+</a>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+    overflow: hidden;
+    transition:
+      border-color 200ms ease,
+      transform 200ms ease,
+      box-shadow 200ms ease;
+  }
+
+  .card:hover {
+    border-color: #3f3f46;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .mini {
+    position: relative;
+    height: 190px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 50% 100%, rgba(34, 211, 238, 0.04), transparent 65%),
+      var(--background);
+  }
+
+  .mini-mount {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .mini-vector {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    pointer-events: none;
+  }
+
+  .mini-vector :global(svg) {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+  }
+
+  .title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  h3 {
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .kind {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted-foreground);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 2px 8px;
+    white-space: nowrap;
+  }
+
+  p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

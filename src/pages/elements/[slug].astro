@@ -1,0 +1,332 @@
+---
+import Docs from '../../layouts/Docs.astro';
+import CodeBlock from '../../components/site/CodeBlock.astro';
+import PreviewFrame from '../../components/site/PreviewFrame.astro';
+import { elements } from '../../lib/registry';
+import { getSource } from '../../lib/sources';
+import { examples } from '../../lib/examples';
+
+export function getStaticPaths() {
+  return elements.map((element) => ({
+    params: { slug: element.slug },
+    props: { element },
+  }));
+}
+
+const { element } = Astro.props;
+const source = getSource(element.slug);
+const usage = examples[element.slug];
+
+const index = elements.findIndex((e) => e.slug === element.slug);
+const prev = index > 0 ? elements[index - 1] : undefined;
+const next = index < elements.length - 1 ? elements[index + 1] : undefined;
+
+const isVector = element.kind === 'vector';
+
+const kindLabel =
+  element.kind === 'vector' ? 'SVG' : element.kind === 'motion' ? 'GSAP / CSS' : 'WebGL';
+
+let installCommand: string | undefined;
+let installNote: string | undefined;
+
+if (isVector) {
+  installNote = 'Zero dependencies. Copy the SVG above and paste it anywhere in your markup.';
+} else if (element.slug.startsWith('motion-')) {
+  installCommand = 'npm install gsap';
+  } else if (['Effects', 'Buttons', '2.5D', 'Loaders'].includes(element.category)) {
+    installNote = 'No dependencies — copy the file and mount it like any other element.';
+  } else {
+  installCommand = 'npm install three @types/three';
+}
+---
+
+<Docs title={`${element.name} — Collider`} description={element.description}>
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/elements">Elements</a>
+    <span>/</span>
+    <span class="current">{element.name}</span>
+  </nav>
+
+  <div class="title-row">
+    <h1>{element.name}</h1>
+    <span class="kind-badge">{kindLabel}</span>
+  </div>
+  <p class="lede">{element.description}</p>
+
+  <div class="tabs" role="tablist" aria-label="Element views">
+    <button type="button" role="tab" class="tab active" data-tab="preview" aria-selected="true">
+      Preview
+    </button>
+    <button type="button" role="tab" class="tab" data-tab="code" aria-selected="false">
+      Code
+    </button>
+  </div>
+
+  <div class="panel active" id="panel-preview" data-panel="preview">
+    <PreviewFrame
+      slug={isVector ? undefined : element.slug}
+      html={isVector ? source : undefined}
+      height={460}
+    />
+  </div>
+
+  <div class="panel" id="panel-code" data-panel="code" hidden>
+    <CodeBlock code={source} lang={isVector ? 'html' : 'ts'} filename={`${element.slug}.${isVector ? 'svg' : 'ts'}`} />
+  </div>
+
+  <section class="doc-section">
+    <h2>Installation</h2>
+    {
+      isVector ? (
+        <p class="note">{installNote}</p>
+      ) : installNote ? (
+        <p class="note">{installNote}</p>
+      ) : (
+        <CodeBlock code={installCommand!} lang="bash" filename="Terminal" />
+      )
+    }
+  </section>
+
+  {
+    !isVector && usage && (
+      <section class="doc-section">
+        <h2>Usage</h2>
+        <p class="note">
+          Every factory mounts into a container and returns a destroy function for cleanup.
+        </p>
+        <CodeBlock code={usage} lang="ts" filename="main.ts" />
+      </section>
+    )
+  }
+
+  <section class="doc-section">
+    <h2>Tips</h2>
+    <ul class="tips">
+      <li>Containers must have explicit height; elements resize automatically.</li>
+      {
+        isVector ? (
+          <li>Swap gradient stops and colors directly in the markup to match your brand.</li>
+        ) : (
+          <li>All options are optional — sensible defaults ship out of the box.</li>
+        )
+      }
+      <li>
+        {
+          isVector
+            ? 'Animations use SMIL, so they run in every modern browser with no JavaScript.'
+            : 'Call destroy() when unmounting to free GPU resources.'
+        }
+      </li>
+    </ul>
+  </section>
+
+  <nav class="pager" aria-label="Pagination">
+    {
+      prev ? (
+        <a class="pager-link" href={`/elements/${prev.slug}`}>
+          <span>Previous</span>
+          <strong>{prev.name}</strong>
+        </a>
+      ) : (
+        <span />
+      )
+    }
+    {
+      next ? (
+        <a class="pager-link right" href={`/elements/${next.slug}`}>
+          <span>Next</span>
+          <strong>{next.name}</strong>
+        </a>
+      ) : (
+        <span />
+      )
+    }
+  </nav>
+</Docs>
+
+<style>
+  .crumbs {
+    display: flex;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted-foreground);
+    margin-bottom: 18px;
+  }
+
+  .crumbs a:hover {
+    color: var(--foreground);
+  }
+
+  .current {
+    color: var(--foreground);
+  }
+
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  h1 {
+    font-size: 32px;
+    letter-spacing: -0.025em;
+  }
+
+  .kind-badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--border-strong);
+    color: var(--muted);
+    border-radius: 999px;
+    padding: 3px 9px;
+  }
+
+  .lede {
+    color: var(--muted);
+    margin-top: 10px;
+    max-width: 620px;
+  }
+
+  .tabs {
+    display: inline-flex;
+    gap: 4px;
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    padding: 4px;
+    background: var(--card);
+    margin-block: 26px 14px;
+  }
+
+  .tab {
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 7px;
+    transition:
+      color 150ms ease,
+      background 150ms ease;
+  }
+
+  .tab:hover {
+    color: var(--foreground);
+  }
+
+  .tab.active {
+    background: rgba(255, 255, 255, 0.09);
+    color: var(--foreground);
+  }
+
+  .panel[hidden] {
+    display: none;
+  }
+
+  .doc-section {
+    margin-top: 44px;
+  }
+
+  .doc-section h2 {
+    font-size: 20px;
+    margin-bottom: 14px;
+    letter-spacing: -0.015em;
+  }
+
+  .note {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+
+  .tips {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tips li {
+    position: relative;
+    padding-left: 20px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .tips li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--accent);
+    opacity: 0.7;
+  }
+
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .pager-link {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    min-width: 180px;
+    transition:
+      border-color 150ms ease,
+      background 150ms ease;
+  }
+
+  .pager-link:hover {
+    border-color: #3f3f46;
+    background: var(--card);
+  }
+
+  .pager-link span {
+    font-size: 11.5px;
+    color: var(--muted-foreground);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .pager-link strong {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .pager-link.right {
+    text-align: right;
+    align-items: flex-end;
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.tab');
+  const panels = document.querySelectorAll<HTMLElement>('.panel');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tabs.forEach((t) => {
+        const active = t === tab;
+        t.classList.toggle('active', active);
+        t.setAttribute('aria-selected', String(active));
+      });
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.panel !== target;
+      });
+    });
+  });
+</script>

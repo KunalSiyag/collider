@@ -1,0 +1,43 @@
+---
+import Base from './Base.astro';
+import Header from '../components/site/Header.astro';
+import Footer from '../components/site/Footer.astro';
+import Sidebar from '../components/site/Sidebar.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <Header />
+  <div class="container docs-shell">
+    <Sidebar />
+    <main class="docs-main">
+      <slot />
+    </main>
+  </div>
+  <Footer />
+</Base>
+
+<style>
+  .docs-shell {
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+  }
+
+  .docs-main {
+    flex: 1;
+    min-width: 0;
+    padding-block: 32px 80px;
+    max-width: 860px;
+  }
+</style>
+
+<script>
+  import '../lib/mount';
+</script>

@@ -1,0 +1,70 @@
+---
+import CopyIcon from './CopyIcon.astro';
+
+interface Props {
+  command?: string;
+}
+
+const { command = 'npm install three' } = Astro.props;
+---
+
+<div class="install-pill">
+  <code id="install-text">{command}</code>
+  <button class="copy-btn" type="button" aria-label="Copy command">
+    <CopyIcon size={13} />
+  </button>
+</div>
+
+<style>
+  .install-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    height: 42px;
+    padding-inline: 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-strong);
+    background: rgba(255, 255, 255, 0.03);
+    font-size: 13px;
+  }
+
+  code {
+    color: #a5f3fc;
+  }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    transition:
+      color 150ms ease,
+      background 150ms ease;
+  }
+
+  .copy-btn:hover {
+    color: var(--foreground);
+    background: rgba(255, 255, 255, 0.08);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.install-pill').forEach((pill) => {
+    const text = pill.querySelector('code');
+    const btn = pill.querySelector('button');
+    btn?.addEventListener('click', async () => {
+      if (!text) return;
+      await navigator.clipboard.writeText(text.textContent ?? '');
+      const original = text.textContent;
+      text.textContent = 'copied!';
+      setTimeout(() => {
+        if (text) text.textContent = original;
+      }, 1200);
+    });
+  });
+</script>

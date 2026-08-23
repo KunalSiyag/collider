@@ -1,0 +1,46 @@
+---
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>Built with Astro &amp; Three.js. MIT licensed.</p>
+    <nav aria-label="Footer">
+      <a href="/elements">Elements</a>
+      <a href="https://threejs.org/docs" target="_blank" rel="noopener noreferrer">Three.js</a>
+      <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    margin-top: 96px;
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    color: var(--muted-foreground);
+    font-size: 13px;
+  }
+
+  nav {
+    display: flex;
+    gap: 20px;
+  }
+
+  nav a:hover {
+    color: var(--foreground);
+  }
+
+  @media (max-width: 480px) {
+    .footer-inner {
+      flex-direction: column;
+      padding-block: 20px;
+      gap: 12px;
+    }
+  }
+</style>

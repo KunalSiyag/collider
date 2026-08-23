@@ -1,0 +1,92 @@
+---
+import { categories, byCategory } from '../../lib/registry';
+
+const pathname = Astro.url.pathname;
+---
+
+<aside class="sidebar">
+  <div class="group">
+    <a href="/elements" class:list={['group-link', { active: pathname === '/elements' }]}>
+      Overview
+    </a>
+  </div>
+
+  {
+    categories.map((category) => (
+      <div class="group">
+        <h4>{category}</h4>
+        <ul>
+          {byCategory(category).map((element) => (
+            <li>
+              <a
+                href={`/elements/${element.slug}`}
+                class:list={{ active: pathname === `/elements/${element.slug}` }}
+              >
+                {element.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</aside>
+
+<style>
+  .sidebar {
+    position: sticky;
+    top: 60px;
+    align-self: start;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    padding-block: 32px 64px;
+    width: 220px;
+    flex-shrink: 0;
+  }
+
+  .group {
+    margin-bottom: 28px;
+  }
+
+  h4 {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--foreground);
+    margin-bottom: 8px;
+    padding-inline: 10px;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  a {
+    display: block;
+    font-size: 13.5px;
+    color: var(--muted-foreground);
+    padding: 5px 10px;
+    border-radius: 6px;
+    transition:
+      color 150ms ease,
+      background 150ms ease;
+  }
+
+  a:hover {
+    color: var(--foreground);
+  }
+
+  a.active,
+  .group-link.active {
+    color: var(--foreground);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  @media (max-width: 900px) {
+    .sidebar {
+      display: none;
+    }
+  }
+</style>

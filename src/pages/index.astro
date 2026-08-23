@@ -1,0 +1,288 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/site/Header.astro';
+import Footer from '../components/site/Footer.astro';
+import ElementCard from '../components/site/ElementCard.astro';
+import InstallPill from '../components/site/InstallPill.astro';
+import { elements, byCategory, type ElementCategory } from '../lib/registry';
+
+const featured = [
+  'particle-field',
+  'wave-plane',
+  'grid-floor',
+  'distorted-sphere',
+  'wireframe-globe',
+  'liquid-knot',
+].map((slug) => elements.find((e) => e.slug === slug)!);
+
+const showcaseCategories: Array<[string, ElementCategory]> = [
+  ['Motion', 'Motion'],
+  ['2.5D', '2.5D'],
+  ['Elementals', 'Elementals'],
+  ['Avatars', 'Avatars'],
+  ['Textures', 'Textures'],
+  ['Loaders', 'Loaders'],
+  ['Buttons', 'Buttons'],
+  ['Isometric', 'Isometric'],
+  ['Effects', 'Effects'],
+  ['Monsters', 'Monsters'],
+  ['Shapes', 'Shapes'],
+  ['Vector art', 'Vector'],
+];
+---
+
+<Base>
+  <Header />
+
+  <section class="hero">
+    <div class="hero-bg" data-collider="particle-field" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="container hero-content">
+      <span class="badge">
+        <span class="pulse-dot"></span>
+        {elements.length} elements &middot; WebGL + SVG
+      </span>
+      <h1>
+        Three.js elements,<br />
+        <span class="text-gradient">ready to ship.</span>
+      </h1>
+      <p class="sub">
+        Beautifully crafted, dependency-free 3D components for the modern web.
+        Copy the source, paste it into your project, and own every line.
+      </p>
+      <div class="cta-row">
+        <a href="/elements" class="btn btn-primary">Browse elements</a>
+        <a href="#how" class="btn">How it works</a>
+      </div>
+      <div class="install-row">
+        <InstallPill />
+        <span class="hint">then copy any element below</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="section-head">
+      <h2>Featured</h2>
+      <a href="/elements" class="see-all">
+        View all {elements.length}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="grid">
+      {featured.map((meta) => <ElementCard meta={meta} />)}
+    </div>
+  </section>
+
+  <section id="how" class="section container">
+    <div class="section-head">
+      <h2>How it works</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3>Install Three.js</h3>
+        <p>One dependency. No wrapper libraries, no runtime lock-in.</p>
+        <code>npm install three</code>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3>Copy the source</h3>
+        <p>Every element is a single self-contained file. Read it, tweak it, keep it.</p>
+        <code>elements/particle-field.ts</code>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3>Mount it anywhere</h3>
+        <p>Each factory takes a container and options, returns a cleanup function.</p>
+        <code>createParticleField(el)</code>
+      </div>
+    </div>
+  </section>
+
+  {
+    showcaseCategories.map(([title, category]) => {
+      const items = byCategory(category);
+      if (items.length === 0) return null;
+      return (
+        <section class="section container">
+          <div class="section-head">
+            <h2>{title}</h2>
+            <a href="/elements" class="see-all">
+              View all {items.length}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+          </div>
+          <div class="grid">
+            {items.slice(0, 4).map((meta) => (
+              <ElementCard meta={meta} />
+            ))}
+          </div>
+        </section>
+      );
+    })
+  }
+
+  <Footer />
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 120%, rgba(9, 9, 11, 0.9), transparent 55%),
+      linear-gradient(to bottom, rgba(9, 9, 11, 0.35), transparent 30%, rgba(9, 9, 11, 0.75) 95%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding-block: 96px;
+  }
+
+  h1 {
+    font-size: clamp(40px, 7vw, 76px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 700;
+    margin-top: 20px;
+  }
+
+  .sub {
+    max-width: 520px;
+    color: var(--muted);
+    font-size: 17px;
+    margin-top: 22px;
+  }
+
+  .pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--accent-2);
+    box-shadow: 0 0 8px var(--accent-2);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .install-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .hint {
+    font-size: 12.5px;
+    color: var(--muted-foreground);
+  }
+
+  .section {
+    padding-block: 72px 8px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  h2 {
+    font-size: 26px;
+    letter-spacing: -0.02em;
+  }
+
+  .see-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    color: var(--muted);
+    transition: color 150ms ease;
+  }
+
+  .see-all:hover {
+    color: var(--foreground);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .step {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .step-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  .step h3 {
+    font-size: 16px;
+  }
+
+  .step p {
+    font-size: 13.5px;
+    color: var(--muted);
+    flex: 1;
+  }
+
+  .step code {
+    font-size: 12px;
+    color: #a5f3fc;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+</style>
+
+<script>
+  import '../lib/mount';
+</script>
