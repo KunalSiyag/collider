@@ -3,8 +3,18 @@ import Docs from '../../layouts/Docs.astro';
 import CodeBlock from '../../components/site/CodeBlock.astro';
 import PreviewFrame from '../../components/site/PreviewFrame.astro';
 import { elements } from '../../lib/registry';
-import { getSource } from '../../lib/sources';
+import { getSource, factoryNames } from '../../lib/sources';
 import { examples } from '../../lib/examples';
+
+function autoUsage(slug: string, exportName: string): string {
+  return `import { ${exportName} } from './${slug}';
+
+const destroy = ${exportName}(document.querySelector('#hero'), {
+  // all options are optional
+});
+
+destroy();`;
+}
 
 export function getStaticPaths() {
   return elements.map((element) => ({
@@ -15,7 +25,7 @@ export function getStaticPaths() {
 
 const { element } = Astro.props;
 const source = getSource(element.slug);
-const usage = examples[element.slug];
+const usage = examples[element.slug] ?? (factoryNames[element.slug] ? autoUsage(element.slug, factoryNames[element.slug]) : undefined);
 
 const index = elements.findIndex((e) => e.slug === element.slug);
 const prev = index > 0 ? elements[index - 1] : undefined;
