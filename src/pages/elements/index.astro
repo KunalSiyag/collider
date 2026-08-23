@@ -2,27 +2,48 @@
 import Docs from '../../layouts/Docs.astro';
 import ElementCard from '../../components/site/ElementCard.astro';
 import { elements, categories, byCategory } from '../../lib/registry';
+import { categoryPath, categorySlug } from '../../lib/categories';
+
+const PREVIEW_COUNT = 8;
 ---
 
 <Docs
   title={`Elements — Collider`}
-  description={`${elements.length} ready-to-use Three.js and SVG elements. Copy, paste, ship.`}
+  description={`${elements.length} ready-to-use Three.js, GSAP and SVG elements. Copy, paste, ship.`}
 >
   <h1>Elements</h1>
   <p class="lede">
     Every element is production-ready: typed options, resize handling, cleanup on
     destroy. WebGL elements need <code>three</code>; SVG art is dependency-free.
+    Pick a category below to explore.
   </p>
+
+  <nav class="cat-nav" aria-label="Categories">
+    {
+      categories.map((category) => (
+        <a href={categoryPath(category)}>
+          {category}
+          <span class="count">{byCategory(category).length}</span>
+        </a>
+      ))
+    }
+  </nav>
 
   {
     categories.map((category) => {
       const items = byCategory(category);
       if (items.length === 0) return null;
       return (
-        <section class="cat">
-          <h2>{category}</h2>
+        <section class="cat" id={categorySlug(category)}>
+          <div class="section-head">
+            <h2>{category}</h2>
+            <a href={categoryPath(category)} class="see-all">
+              View all {items.length}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+          </div>
           <div class="grid">
-            {items.map((meta) => (
+            {items.slice(0, PREVIEW_COUNT).map((meta) => (
               <ElementCard meta={meta} />
             ))}
           </div>
@@ -52,16 +73,75 @@ import { elements, categories, byCategory } from '../../lib/registry';
     border-radius: 5px;
   }
 
+  .cat-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .cat-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--muted-foreground);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 5px 12px;
+    transition:
+      color 150ms ease,
+      border-color 150ms ease,
+      background 150ms ease;
+  }
+
+  .cat-nav a:hover {
+    color: var(--foreground);
+    border-color: #3f3f46;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .count {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted-foreground);
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 999px;
+    padding: 1px 7px;
+  }
+
   .cat {
     margin-top: 48px;
+    scroll-margin-top: 80px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 18px;
   }
 
   h2 {
     font-size: 20px;
     letter-spacing: -0.015em;
-    margin-bottom: 18px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
+  }
+
+  .see-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    color: var(--muted);
+    white-space: nowrap;
+    transition: color 150ms ease;
+  }
+
+  .see-all:hover {
+    color: var(--foreground);
   }
 
   .grid {

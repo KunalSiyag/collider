@@ -5,6 +5,7 @@ import Footer from '../components/site/Footer.astro';
 import ElementCard from '../components/site/ElementCard.astro';
 import InstallPill from '../components/site/InstallPill.astro';
 import { elements, byCategory, type ElementCategory } from '../lib/registry';
+import { categoryPath } from '../lib/categories';
 
 const featured = [
   'particle-field',
@@ -108,7 +109,7 @@ const showcaseCategories: Array<[string, ElementCategory]> = [
         <section class="section container">
           <div class="section-head">
             <h2>{title}</h2>
-            <a href="/elements" class="see-all">
+            <a href={categoryPath(category)} class="see-all">
               View all {items.length}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
             </a>

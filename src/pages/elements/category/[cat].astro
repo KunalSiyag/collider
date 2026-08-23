@@ -1,0 +1,67 @@
+---
+import Docs from '../../../layouts/Docs.astro';
+import ElementCard from '../../../components/site/ElementCard.astro';
+import { categories, byCategory, type ElementCategory } from '../../../lib/registry';
+import { categoryPath, categorySlug } from '../../../lib/categories';
+
+export function getStaticPaths() {
+  return categories.map((category) => ({
+    params: { cat: categorySlug(category) },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+const items = byCategory(category);
+---
+
+<Docs title={`${category} — Collider`} description={`Browse ${items.length} ${category} elements.`}>
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/elements">Elements</a>
+    <span>/</span>
+    <span class="current">{category}</span>
+  </nav>
+
+  <h1>{category}</h1>
+  <p class="lede">{items.length} elements in this collection.</p>
+
+  <div class="grid">
+    {items.map((meta) => <ElementCard meta={meta} />)}
+  </div>
+</Docs>
+
+<style>
+  .crumbs {
+    display: flex;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted-foreground);
+    margin-bottom: 18px;
+  }
+
+  .crumbs a:hover {
+    color: var(--foreground);
+  }
+
+  .current {
+    color: var(--foreground);
+  }
+
+  h1 {
+    font-size: 34px;
+    letter-spacing: -0.025em;
+  }
+
+  .lede {
+    color: var(--muted);
+    margin-top: 10px;
+    margin-bottom: 28px;
+    font-size: 15px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+  }
+</style>

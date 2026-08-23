@@ -1,7 +1,21 @@
 ---
-import { categories, byCategory } from '../../lib/registry';
+import { categories, byCategory, getElement, type ElementCategory } from '../../lib/registry';
+import { categoryPath, categorySlug } from '../../lib/categories';
 
-const pathname = Astro.url.pathname;
+function slugFor(category: ElementCategory): string {
+  return categorySlug(category);
+}
+
+const pathname = Astro.url.pathname.replace(/\/+$/, '');
+
+let activeCategory: ElementCategory | undefined;
+if (pathname.startsWith('/elements/category/')) {
+  const catParam = pathname.split('/')[3];
+  activeCategory = categories.find((c) => slugFor(c) === catParam);
+} else if (pathname.startsWith('/elements/')) {
+  const slug = pathname.split('/')[2];
+  activeCategory = getElement(slug ?? '')?.category;
+}
 ---
 
 <aside class="sidebar">
@@ -11,25 +25,21 @@ const pathname = Astro.url.pathname;
     </a>
   </div>
 
-  {
-    categories.map((category) => (
-      <div class="group">
-        <h4>{category}</h4>
-        <ul>
-          {byCategory(category).map((element) => (
-            <li>
-              <a
-                href={`/elements/${element.slug}`}
-                class:list={{ active: pathname === `/elements/${element.slug}` }}
-              >
-                {element.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))
-  }
+  <div class="group">
+    <h4>Categories</h4>
+    <ul>
+      {
+        categories.map((category) => (
+          <li>
+            <a href={categoryPath(category)} class:list={{ active: activeCategory === category }}>
+              {category}
+              <span class="count">{byCategory(category).length}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </aside>
 
 <style>
@@ -64,7 +74,10 @@ const pathname = Astro.url.pathname;
   }
 
   a {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
     font-size: 13.5px;
     color: var(--muted-foreground);
     padding: 5px 10px;
@@ -82,6 +95,15 @@ const pathname = Astro.url.pathname;
   .group-link.active {
     color: var(--foreground);
     background: rgba(255, 255, 255, 0.05);
+  }
+
+  .count {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted-foreground);
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 999px;
+    padding: 1px 7px;
   }
 
   @media (max-width: 900px) {
