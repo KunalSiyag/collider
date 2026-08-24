@@ -1,0 +1,238 @@
+---
+/**
+ * Pagination
+ * ==========
+ * A reusable, accessible, numbered pagination bar for any Astro route that
+ * uses `paginate()` in its `getStaticPaths`.
+ *
+ * HOW TO USE
+ * ----------
+ * 1. In a paginated page (one whose getStaticPaths calls `paginate(...)`),
+ *    pass the `page` prop straight through:
+ *
+ *      import Pagination from '../../components/site/Pagination.astro';
+ *      <Pagination page={page} />
+ *
+ * 2. Optional props:
+ *      siblingCount — how many page numbers to show either side of the
+ *                     current one (default 1). Higher = more numbers shown.
+ *      ariaLabel    — the accessible name of the <nav> (default "Pagination").
+ *
+ * HOW IT WORKS
+ * ------------
+ * Astro's `paginate()` helper gives us a `page` object containing:
+ *   page.currentPage — 1-based index of the current page
+ *   page.lastPage    — total number of pages
+ *   page.url.first   — URL of page 1        e.g. "/elements/category/vector"
+ *   page.url.prev    — URL of previous page (undefined on page 1)
+ *   page.url.next    — URL of next page     (undefined on the last page)
+ *
+ * Numbered links are built from `page.url.first`:
+ *   page 1 -> "/elements/category/vector"
+ *   page N -> "/elements/category/vector/N"
+ *
+ * The visible window of page numbers uses the common "ellipsis" pattern:
+ * with current = 5, last = 20, siblingCount = 1 you get:
+ *   [1] … [4] [5] [6] … [20]
+ * If every page fits within `1 + siblings*2 + 5` items, all are shown and no
+ * ellipses appear. Tweak `siblingCount` to widen/narrow the window.
+ */
+interface Props {
+  /** The `page` object produced by Astro's paginate() helper. */
+  page: {
+    currentPage: number;
+    lastPage: number;
+    url: {
+      current?: string;
+      first?: string;
+      prev?: string;
+      next?: string;
+    };
+  };
+  /** Pages shown on each side of the current page before collapsing into an ellipsis. */
+  siblingCount?: number;
+  /** Accessible name for the nav landmark. */
+  ariaLabel?: string;
+}
+
+const { page, siblingCount = 1, ariaLabel = 'Pagination' } = Astro.props;
+
+/** Builds an array [start, start+1, ..., end] (empty if end < start). */
+function inclusiveRange(start: number, end: number): number[] {
+  return Array.from({ length: Math.max(0, end - start + 1) }, (_, i) => start + i);
+}
+
+/**
+ * Returns the list of pagination items to render.
+ * Numbers are rendered as links; 'gap' entries render as an ellipsis (…).
+ */
+function pageItems(current: number, last: number, siblings: number): Array<number | 'gap'> {
+  // Enough room to show everything — skip the ellipsis math entirely.
+  const maxWithoutGaps = siblings * 2 + 5; // first + last + current + 2*siblings + 2 gaps
+  if (last <= maxWithoutGaps) return inclusiveRange(1, last);
+
+  const leftBound = Math.max(current - siblings, 1);
+  const rightBound = Math.min(current + siblings, last);
+
+  const showLeftGap = leftBound > 2;
+  const showRightGap = rightBound < last - 1;
+
+  const items: Array<number | 'gap'> = [];
+
+  if (!showLeftGap) {
+    // Current page is near the start — show pages 1..rightBound.
+    items.push(...inclusiveRange(1, rightBound));
+  } else if (!showRightGap) {
+    // Current page is near the end — show pages leftBound..last.
+    items.push(...inclusiveRange(leftBound, last));
+  } else {
+    // Current page is in the middle — gaps on both sides.
+    items.push(...inclusiveRange(leftBound, rightBound));
+  }
+
+  // Wrap with the fixed first/last anchors and insert gap markers.
+  const anchored: Array<number | 'gap'> = [1];
+  if (showLeftGap) anchored.push('gap');
+  anchored.push(...items.filter((n): n is number => typeof n === 'number' && n !== 1 && n !== last));
+  if (showRightGap) anchored.push('gap');
+  if (last > 1) anchored.push(last);
+  return anchored;
+}
+
+const items = pageItems(page.currentPage, page.lastPage, siblingCount);
+
+/** URL for a given page number.
+ *  Astro's URL shape for paginate() routes:
+ *      page 1:  "/elements/category/vector"
+ *      page N:  "/elements/category/vector/N"
+ *
+ *  NOTE: page.url.first is only defined when we are NOT on page 1, so as a
+ *  fallback we strip any trailing "/<digits>" off the current URL to recover
+ *  the un-numbered base path.
+ */
+function urlFor(n: number): string | undefined {
+  const base = (page.url.first ?? page.url.prev ?? page.url.current ?? '').replace(/\/\d+$/, '');
+  return n === 1 ? base : `${base}/${n}`;
+}
+---
+
+{
+  page.lastPage > 1 && (
+    <nav class="pager" aria-label={ariaLabel}>
+      {/* Previous: hidden entirely on page 1 so keyboard users don't tab to it */}
+      {page.url.prev ? (
+        <a class="pager-arrow" href={page.url.prev} rel="prev" aria-label="Previous page">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M19 12H5M11 18l-6-6 6-6" />
+          </svg>
+          <span>Prev</span>
+        </a>
+      ) : (
+        <span class="pager-spacer" />
+      )}
+
+      <ul class="pager-pages">
+        {items.map((item) =>
+          item === 'gap' ? (
+            <li class="pager-gap" aria-hidden="true">
+              …
+            </li>
+          ) : item === page.currentPage ? (
+            /* aria-current="page" tells screen readers which page we're on */
+            <li>
+              <span class="pager-number current" aria-current="page">
+                {item}
+              </span>
+            </li>
+          ) : (
+            <li>
+              <a class="pager-number" href={urlFor(item)} aria-label={`Page ${item}`}>
+                {item}
+              </a>
+            </li>
+          ),
+        )}
+      </ul>
+
+      {/* Next: hidden entirely on the last page */}
+      {page.url.next ? (
+        <a class="pager-arrow right" href={page.url.next} rel="next" aria-label="Next page">
+          <span>Next</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+      ) : (
+        <span class="pager-spacer" />
+      )}
+    </nav>
+  )
+}
+
+<style>
+  .pager {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .pager-arrow,
+  .pager-number {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 8px 14px;
+    transition:
+      border-color 150ms ease,
+      background 150ms ease,
+      color 150ms ease;
+  }
+
+  .pager-arrow:hover,
+  .pager-number:hover {
+    border-color: #3f3f46;
+    background: var(--card);
+    color: var(--foreground);
+  }
+
+  .pager-pages {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .pager-gap {
+    color: var(--muted-foreground);
+    padding: 0 2px;
+    user-select: none;
+  }
+
+  .current {
+    border-color: #3f3f46;
+    background: rgba(139, 92, 246, 0.14);
+    color: var(--foreground);
+  }
+
+  .pager-spacer {
+    min-width: 74px;
+  }
+
+  /* On small screens collapse to just Prev / Next arrows. */
+  @media (max-width: 560px) {
+    .pager-pages {
+      display: none;
+    }
+  }
+</style>

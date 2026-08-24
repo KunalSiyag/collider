@@ -1,14 +1,40 @@
 ---
+/**
+ * Category listing, paginated
+ * ============================
+ * Route:  /elements/category/[cat]          -> page 1
+ *         /elements/category/[cat]/2 ... N  -> deeper pages
+ *
+ * HOW PAGINATION WORKS HERE (modify with care)
+ * ---------------------------------------------
+ * `getStaticPaths` runs once at build time. For every category we call Astro's
+ * `paginate(items, {...})`, which slices the items into chunks of `pageSize`
+ * and generates one static HTML page per chunk:
+ *
+ *   - The `[...page]` rest param in the filename receives "undefined" for the
+ *     first page (rendering /elements/category/vector) and "2", "3", ... for
+ *     later pages (/elements/category/vector/2).
+ *   - Everything paginate() computes (currentPage, lastPage, url.prev/next,
+ *     the sliced data array) is handed to this component via `Astro.props.page`.
+ *   - `props: { category }` forwards extra data each generated page needs.
+ *
+ * To change how many cards appear per page, edit `pageSize` below.
+ */
 import Docs from '../../../../layouts/Docs.astro';
 import ElementCard from '../../../../components/site/ElementCard.astro';
-import { categories, byCategory, type ElementCategory } from '../../../../lib/registry';
+import Pagination from '../../../../components/site/Pagination.astro';
+import { categories, byCategory, type ElementCategory, type ElementMeta } from '../../../../lib/registry';
 import { categorySlug } from '../../../../lib/categories';
 
-export function getStaticPaths({ paginate }: any) {
+/** Generates one static page per chunk of PAGE_SIZE items, for every category.
+ *  Runs entirely at build time — no runtime cost. */
+export function getStaticPaths({ paginate }: { paginate: Function }) {
   return categories.flatMap((category) =>
     paginate(byCategory(category), {
       params: { cat: categorySlug(category) },
       props: { category },
+      // Number of element cards shown per page. Change this to re-chunk the
+      // listing (Astro regenerates every page on the next build).
       pageSize: 24,
     }),
   );
@@ -16,10 +42,27 @@ export function getStaticPaths({ paginate }: any) {
 
 interface Props {
   category: ElementCategory;
-  page: any;
+  /* The shape Astro's paginate() hands us (a subset of its Page object). */
+  page: {
+    currentPage: number;
+    lastPage: number;
+    start: number;
+    end: number;
+    total: number;
+    data: ElementMeta[];
+    url: {
+      first?: string;
+      prev?: string;
+      next?: string;
+    };
+  };
 }
 
 const { category, page } = Astro.props;
+
+/* byCategory() is memoized in registry.ts, so calling it again here (in
+ * addition to inside getStaticPaths) costs nothing at build time. We use the
+ * full list only for the count shown in the lede text. */
 const items = byCategory(category);
 ---
 
@@ -32,6 +75,8 @@ const items = byCategory(category);
       page.currentPage > 1 && (
         <span>
           <span>/</span>
+          {/* Only the current page crumb renders as plain text — links to
+              specific pages live in the pager below. */}
           <span class="current">Page {page.currentPage}</span>
         </span>
       )
@@ -44,35 +89,15 @@ const items = byCategory(category);
   </p>
 
   <div class="grid">
+    {/* page.data is ONLY this page's slice of the full category list.
+        ElementCard inlines the SVG preview for vector elements, so keeping
+        pageSize moderate directly controls this page's HTML weight. */}
     {page.data.map((meta) => <ElementCard meta={meta} />)}
   </div>
 
-  {
-    page.lastPage > 1 && (
-      <nav class="pager" aria-label="Pagination">
-        {page.url.prev ? (
-          <a class="pager-link" href={page.url.prev}>
-            <span>Previous</span>
-            <strong>
-              Page {page.currentPage - 1} of {page.lastPage}
-            </strong>
-          </a>
-        ) : (
-          <span />
-        )}
-        {page.url.next ? (
-          <a class="pager-link right" href={page.url.next}>
-            <span>Next</span>
-            <strong>
-              Page {page.currentPage + 1} of {page.lastPage}
-            </strong>
-          </a>
-        ) : (
-          <span />
-        )}
-      </nav>
-    )
-  }
+  {/* Numbered pagination (1 … 4 [5] 6 … 20). Swap for simple prev/next links
+      by replacing this with page.url.prev / page.url.next anchors. */}
+  <Pagination page={page} ariaLabel={`${category} pagination`} />
 </Docs>
 
 <style>
@@ -108,49 +133,5 @@ const items = byCategory(category);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 18px;
-  }
-
-  .pager {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    margin-top: 40px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-  }
-
-  .pager-link {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 18px;
-    min-width: 180px;
-    transition:
-      border-color 150ms ease,
-      background 150ms ease;
-  }
-
-  .pager-link:hover {
-    border-color: #3f3f46;
-    background: var(--card);
-  }
-
-  .pager-link span {
-    font-size: 11.5px;
-    color: var(--muted-foreground);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .pager-link strong {
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  .pager-link.right {
-    text-align: right;
-    align-items: flex-end;
   }
 </style>

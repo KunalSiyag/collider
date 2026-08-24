@@ -12148,9 +12148,34 @@ export const categories: ElementCategory[] = [
 ];
 
 export function getElement(slug: string): ElementMeta | undefined {
+  /* Linear scan over a large array. If lookups become hot (e.g. called in a
+   * loop), build a `Map<string, ElementMeta>` once at module scope instead. */
   return elements.find((e) => e.slug === slug);
 }
 
+/**
+ * Returns every element belonging to one category.
+ *
+ * PERFORMANCE NOTE
+ * ----------------
+ * This used to call `elements.filter(...)` on every invocation. Listing pages
+ * call it many times per build (once per category chip, once per section,
+ * again inside each paginated page's getStaticPaths), and with 1000+ elements
+ * that is a lot of redundant array scans during the build.
+ *
+ * We therefore cache results per category. The registry is static data — it
+ * never changes at runtime — so caching is always safe here.
+ *
+ * IMPORTANT: callers get the SAME cached array back each time. Treat it as
+ * read-only; if you need to mutate or sort, spread it first: `[...byCategory(cat)]`.
+ */
+const categoryCache = new Map<ElementCategory, ElementMeta[]>();
+
 export function byCategory(cat: ElementCategory): ElementMeta[] {
-  return elements.filter((e) => e.category === cat);
+  let result = categoryCache.get(cat);
+  if (!result) {
+    result = elements.filter((e) => e.category === cat);
+    categoryCache.set(cat, result);
+  }
+  return result;
 }

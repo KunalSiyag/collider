@@ -1,6 +1,45 @@
+/**
+ * Collider mount runtime
+ * ======================
+ * This script is included once per site page. It finds every placeholder
+ * element marked with `data-collider="<slug>"` and lazily loads + runs the
+ * matching factory for it.
+ *
+ * LIFECYCLE
+ * ---------
+ *   1. On load we *observe* (not run) every `[data-collider]` node with an
+ *      IntersectionObserver.
+ *   2. When a node scrolls within 300px of the viewport, its factory module is
+ *      dynamically imported (`loaders` map below) and invoked:
+ *          const dispose = factory(container, options)
+ *   3. When the node leaves the viewport, `dispose()` is called so animations,
+ *      rAF loops and WebGL contexts are torn down. Nothing renders offscreen.
+ *   4. Scrolling back re-mounts it fresh.
+ *
+ * HOW TO ADD A NEW ELEMENT
+ * ------------------------
+ *   1. Create `src/<group>/<slug>.ts` exporting e.g.
+ *      `export function createMyThing(container, options) { ...; return () => {...} }`
+ *   2. Register it in the `loaders` map below:
+ *          'my-thing': async () => (await import('../groups/my-thing')).createMyThing,
+ *   3. Add metadata to `src/lib/registry.ts`.
+ *
+ * PERFORMANCE NOTES
+ * -----------------
+ *   - Because each entry uses `await import(...)`, Vite code-splits every
+ *     element into its own chunk; a page only downloads JS for elements that
+ *     actually become visible.
+ *   - Mounting is driven purely by the IntersectionObserver's initial callback,
+ *     which fires for all observed nodes immediately after `observe()` is
+ *     called. We therefore do NOT eagerly call `mount()` in init() — doing so
+ *     used to download and start every animation on the page at load time and
+ *     then instantly unmount the ones below the fold (double work).
+ */
 type Disposer = () => void;
 type Factory = (container: HTMLElement, options?: Record<string, unknown>) => Disposer;
 
+/* slug -> lazy module loader. Every dynamic import here becomes a separate
+ * chunk in the build. Keep keys in sync with registry.ts slugs. */
 const loaders: Record<string, () => Promise<Factory>> = {
   'particle-field': async () =>
     (await import('../elements/particle-field')).createParticleField as unknown as Factory,
@@ -1790,6 +1829,11 @@ const loaders: Record<string, () => Promise<Factory>> = {
 
 const pending = new WeakSet<Element>();
 
+/**
+ * Loads the factory for a container's slug and starts it.
+ * Guards against double-mounts (`pending` set) and against the node being
+ * removed from the DOM while its module chunk was still downloading.
+ */
 async function mount(container: HTMLElement) {
   const slug = container.dataset.collider;
   if (!slug || !(slug in loaders)) return;
@@ -1821,6 +1865,10 @@ async function mount(container: HTMLElement) {
   }
 }
 
+/**
+ * Runs the disposer stored on a container and clears bookkeeping state so the
+ * element can be cleanly re-mounted later.
+ */
 function unmount(container: HTMLElement) {
   const holder = container as HTMLElement & { __colliderDispose?: Disposer };
   if (holder.__colliderDispose) {
@@ -1830,6 +1878,13 @@ function unmount(container: HTMLElement) {
   delete container.dataset.colliderMounted;
 }
 
+/**
+ * Single IntersectionObserver shared by every element on the page.
+ *   - Entering viewport (+300px margin, so we preload just before the user
+ *     sees it)  -> mount.
+ *   - Leaving viewport -> unmount (frees rAF loops / WebGL contexts).
+ * Tweak rootMargin to trade eager loading against bandwidth/CPU.
+ */
 const visibility = new IntersectionObserver(
   (entries) => {
     for (const entry of entries) {
@@ -1844,11 +1899,16 @@ const visibility = new IntersectionObserver(
   { rootMargin: '300px 0px' },
 );
 
+/**
+ * Entry point. We only OBSERVE here — no eager mount() calls. The observer
+ * fires its callback once for every observed node right away, so visible
+ * elements mount immediately while below-fold elements wait until they are
+ * actually approached. This keeps initial page load free of unnecessary
+ * chunk downloads and animation startup for offscreen content.
+ */
 function init() {
-  const els = [...document.querySelectorAll<HTMLElement>('[data-collider]')];
-  els.forEach((el) => {
-    if (!el.dataset.colliderMounted && !pending.has(el)) void mount(el);
-    visibility.observe(el);
+  document.querySelectorAll<HTMLElement>('[data-collider]').forEach((el) => {
+    if (!el.dataset.colliderMounted && !pending.has(el)) visibility.observe(el);
   });
 }
 
