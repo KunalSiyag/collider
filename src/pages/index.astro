@@ -6,6 +6,15 @@ import ElementCard from '../components/site/ElementCard.astro';
 import InstallPill from '../components/site/InstallPill.astro';
 import { elements, byCategory, type ElementCategory } from '../lib/registry';
 import { categoryPath } from '../lib/categories';
+import { createAlpineMeadow } from '../scenes/alpine-meadow';
+
+/* The hero background is the Alpine Meadow scene, inlined at build time.
+ * Because it is a static SVG (SMIL-animated), the hero renders with ZERO
+ * JavaScript — no chunk downloads, no WebGL context, instant LCP.
+ * To use an animated WebGL hero instead, restore:
+ *   <div class="hero-bg" data-collider="particle-field" aria-hidden="true"></div>
+ * To swap in another scene: import its generator from ../scenes/ and call it. */
+const heroBackground = createAlpineMeadow();
 
 const featured = [
   'particle-field',
@@ -17,6 +26,7 @@ const featured = [
 ].map((slug) => elements.find((e) => e.slug === slug)!);
 
 const showcaseCategories: Array<[string, ElementCategory]> = [
+  ['Scenes', 'Scenes'],
   ['Motion', 'Motion'],
   ['2.5D', '2.5D'],
   ['Elementals', 'Elementals'],
@@ -36,7 +46,7 @@ const showcaseCategories: Array<[string, ElementCategory]> = [
   <Header />
 
   <section class="hero">
-    <div class="hero-bg" data-collider="particle-field" aria-hidden="true"></div>
+    <div class="hero-bg" aria-hidden="true" set:html={heroBackground} />
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="container hero-content">
       <span class="badge">
@@ -145,9 +155,18 @@ const showcaseCategories: Array<[string, ElementCategory]> = [
   .hero-overlay {
     position: absolute;
     inset: 0;
+    /* Scrim tuned for a bright, warm scene: darken the top (header) and
+     * bottom (scroll cue) bands plus a soft center pool so the white
+     * headline stays readable without hiding the artwork. */
     background:
-      radial-gradient(ellipse at 50% 120%, rgba(9, 9, 11, 0.9), transparent 55%),
-      linear-gradient(to bottom, rgba(9, 9, 11, 0.35), transparent 30%, rgba(9, 9, 11, 0.75) 95%);
+      radial-gradient(ellipse at 50% 42%, rgba(9, 9, 11, 0.42), transparent 62%),
+      linear-gradient(
+        to bottom,
+        rgba(9, 9, 11, 0.62),
+        rgba(9, 9, 11, 0.12) 32%,
+        rgba(9, 9, 11, 0.16) 62%,
+        rgba(9, 9, 11, 0.82) 96%
+      );
     pointer-events: none;
   }
 

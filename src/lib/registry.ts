@@ -1,5 +1,6 @@
 export type ElementCategory =
   | 'Backgrounds'
+  | 'Scenes'
   | 'Objects'
   | 'Heroes'
   | 'Loaders'
@@ -12127,6 +12128,112 @@ export const elements: ElementMeta[] = [
     category: 'Heroes',
     kind: 'motion',
   },
+  {
+    slug: 'alpine-meadow',
+    name: 'Alpine Meadow',
+    description:
+      'Golden-hour valley with wildflowers, a lit cabin and drifting clouds. Full-bleed hero background.',
+    category: 'Scenes',
+    kind: 'vector',
+    keywords: ['scene', 'hero', 'meadow', 'mountains', 'sunset', 'flowers', 'landscape'],
+  },
+  {
+    slug: 'misty-pines',
+    name: 'Misty Pines',
+    description:
+      'Sunrise burning through valley fog over layered pine ridges. Calm full-bleed hero background.',
+    category: 'Scenes',
+    kind: 'vector',
+    keywords: ['scene', 'hero', 'forest', 'fog', 'sunrise', 'pines', 'landscape'],
+  },
+  {
+    slug: 'aurora-lake',
+    name: 'Aurora Lake',
+    description: 'Northern lights rippling over a mirror-still lake with reflected shimmer.',
+    category: 'Scenes',
+    kind: 'vector',
+    keywords: ['scene', 'aurora', 'lake', 'night', 'stars', 'landscape'],
+  },
+  {
+    slug: 'beach-day',
+    name: 'Beach Day',
+    description: 'A palm-fringed tropical shore with rolling surf and drifting clouds.',
+    category: 'Scenes',
+    kind: 'vector',
+    keywords: ['scene', 'beach', 'sea', 'palm', 'summer', 'landscape'],
+  },
+  {
+    slug: 'countryside-night',
+    name: 'Countryside Night',
+    description: 'A starry farm valley with a glowing farmhouse and drifting fireflies.',
+    category: 'Scenes',
+    kind: 'vector',
+    keywords: ['scene', 'night', 'farm', 'stars', 'fireflies', 'landscape'],
+  },
+  {
+    slug: 'desert-dunes',
+    name: 'Desert Dunes',
+    description: 'Layered sand dunes rolling under a huge hazy sunset with wandering cacti.',
+    category: 'Scenes',
+    kind: 'vector',
+    keywords: ['scene', 'desert', 'dunes', 'sunset', 'cactus', 'landscape'],
+  },
+  {
+    slug: 'balloon-festival',
+    name: 'Balloon Festival',
+    description: 'Hot air balloons of every color drifting over rolling green hills.',
+    category: 'Vector',
+    kind: 'vector',
+    keywords: ['balloons', 'sky', 'festival', 'hills'],
+  },
+  {
+    slug: 'cable-car-line',
+    name: 'Cable Car Line',
+    description: 'Gondolas gliding on cables between mountain stations above the valley.',
+    category: 'Vector',
+    kind: 'vector',
+    keywords: ['cable car', 'gondola', 'mountain', 'alps'],
+  },
+  {
+    slug: 'camp-night',
+    name: 'Camp Night',
+    description: 'A glowing tent and crackling campfire under a dense star field.',
+    category: 'Vector',
+    kind: 'vector',
+    keywords: ['camp', 'tent', 'campfire', 'night', 'stars'],
+  },
+  {
+    slug: 'kite-beach',
+    name: 'Kite Beach',
+    description: 'Sport kites carving across the wind above breaking waves.',
+    category: 'Vector',
+    kind: 'vector',
+    keywords: ['kite', 'beach', 'waves', 'wind'],
+  },
+  {
+    slug: 'paper-boats',
+    name: 'Paper Boats',
+    description: 'Origami boats bobbing down a winding paper stream.',
+    category: 'Vector',
+    kind: 'vector',
+    keywords: ['origami', 'boats', 'stream', 'paper'],
+  },
+  {
+    slug: 'sailboat-regatta',
+    name: 'Sailboat Regatta',
+    description: 'A regatta fleet heeling in the breeze across sunlit water.',
+    category: 'Vector',
+    kind: 'vector',
+    keywords: ['sailboat', 'regatta', 'sailing', 'sea'],
+  },
+  {
+    slug: 'wind-farm',
+    name: 'Wind Farm',
+    description: 'Wind turbines spinning slowly over layered green hills.',
+    category: 'Vector',
+    kind: 'vector',
+    keywords: ['wind', 'turbine', 'energy', 'hills'],
+  },
 ];
 
 export const categories: ElementCategory[] = [
@@ -12137,6 +12244,7 @@ export const categories: ElementCategory[] = [
   'Loaders',
   'Elementals',
   'Backgrounds',
+  'Scenes',
   'Objects',
   'Heroes',
   'Vector',

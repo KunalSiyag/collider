@@ -48,6 +48,23 @@ import { createPerspectiveGrid } from '../vector/perspective-grid';
 import { createConcentricDots } from '../vector/concentric-dots';
 import { createDiagonalStripes } from '../vector/diagonal-stripes';
 
+// Scenes: full-bleed illustrated landscapes (hero backgrounds).
+import { createAlpineMeadow } from '../scenes/alpine-meadow';
+import { createMistyPines } from '../scenes/misty-pines';
+import { createAuroraLake } from '../scenes/aurora-lake';
+import { createBeachDay } from '../scenes/beach-day';
+import { createCountrysideNight } from '../scenes/countryside-night';
+import { createDesertDunes } from '../scenes/desert-dunes';
+
+// Scenic vector art.
+import { createBalloonFestival } from '../vector/balloon-festival';
+import { createCableCarLine } from '../vector/cable-car-line';
+import { createCampNight } from '../vector/camp-night';
+import { createKiteBeach } from '../vector/kite-beach';
+import { createPaperBoats } from '../vector/paper-boats';
+import { createSailboatRegatta } from '../vector/sailboat-regatta';
+import { createWindFarm } from '../vector/wind-farm';
+
 import { createIsoCubes } from '../isometric/iso-cube';
 import { createIsoTower } from '../isometric/iso-tower';
 import { createIsoServer } from '../isometric/iso-server';
@@ -1736,6 +1753,19 @@ export const sources: Record<string, string> = {
   'perspective-grid': createPerspectiveGrid(),
   'concentric-dots': createConcentricDots(),
   'diagonal-stripes': createDiagonalStripes(),
+  'alpine-meadow': createAlpineMeadow(),
+  'misty-pines': createMistyPines(),
+  'aurora-lake': createAuroraLake(),
+  'beach-day': createBeachDay(),
+  'countryside-night': createCountrysideNight(),
+  'desert-dunes': createDesertDunes(),
+  'balloon-festival': createBalloonFestival(),
+  'cable-car-line': createCableCarLine(),
+  'camp-night': createCampNight(),
+  'kite-beach': createKiteBeach(),
+  'paper-boats': createPaperBoats(),
+  'sailboat-regatta': createSailboatRegatta(),
+  'wind-farm': createWindFarm(),
   'iso-cube': createIsoCubes(),
   'iso-tower': createIsoTower(),
   'iso-server': createIsoServer(),
