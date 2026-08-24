@@ -12179,6 +12179,40 @@ export const elements: ElementMeta[] = [
     keywords: ['scene', 'desert', 'dunes', 'sunset', 'cactus', 'landscape'],
   },
   {
+    slug: 'pixel-platformer',
+    name: 'Pixel Platformer',
+    description:
+      'Retro platformer world with question blocks, warp pipes, spinning coins and a hopping hero.',
+    category: 'Scenes',
+    kind: 'vector',
+    keywords: ['scene', 'pixel', 'retro', 'platformer', 'game', 'arcade', '8-bit'],
+  },
+  {
+    slug: 'block-world',
+    name: 'Block World',
+    description:
+      'Voxel landscape of grass blocks, cubic trees, ore veins and square clouds over a pond.',
+    category: 'Scenes',
+    kind: 'vector',
+    keywords: ['scene', 'voxel', 'blocks', 'sandbox', 'cube', 'pixel'],
+  },
+  {
+    slug: 'sakura-hill',
+    name: 'Sakura Hill',
+    description: 'Cherry blossoms drifting over a pagoda hill and river at first light.',
+    category: 'Scenes',
+    kind: 'vector',
+    keywords: ['scene', 'sakura', 'cherry', 'japan', 'pagoda', 'spring', 'petals'],
+  },
+  {
+    slug: 'arctic-night',
+    name: 'Arctic Night',
+    description: 'Snowfall over a glowing winter village beneath swaying aurora curtains.',
+    category: 'Scenes',
+    kind: 'vector',
+    keywords: ['scene', 'winter', 'snow', 'aurora', 'village', 'night', 'christmas'],
+  },
+  {
     slug: 'balloon-festival',
     name: 'Balloon Festival',
     description: 'Hot air balloons of every color drifting over rolling green hills.',

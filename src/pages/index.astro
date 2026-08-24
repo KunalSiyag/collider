@@ -155,19 +155,96 @@ const showcaseCategories: Array<[string, ElementCategory]> = [
   .hero-overlay {
     position: absolute;
     inset: 0;
-    /* Scrim tuned for a bright, warm scene: darken the top (header) and
-     * bottom (scroll cue) bands plus a soft center pool so the white
-     * headline stays readable without hiding the artwork. */
+    /* Scrim for a BRIGHT scene with DARK text (see .hero overrides below):
+     *   - top band stays dark so the fixed white header remains readable
+     *   - the middle is nearly clear with a warm lift to help the dark
+     *     headline pop against the sky, like the reference design
+     *   - the bottom fades into the dark page background below the fold */
     background:
-      radial-gradient(ellipse at 50% 42%, rgba(9, 9, 11, 0.42), transparent 62%),
+      radial-gradient(ellipse at 50% 40%, rgba(255, 250, 235, 0.4), transparent 62%),
       linear-gradient(
         to bottom,
-        rgba(9, 9, 11, 0.62),
-        rgba(9, 9, 11, 0.12) 32%,
-        rgba(9, 9, 11, 0.16) 62%,
-        rgba(9, 9, 11, 0.82) 96%
+        rgba(9, 9, 11, 0.55),
+        rgba(9, 9, 11, 0.05) 30%,
+        rgba(9, 9, 11, 0.02) 60%,
+        rgba(9, 9, 11, 0.88) 97%
       );
     pointer-events: none;
+  }
+
+  /* ---- Light-content treatment -------------------------------------------
+   * The hero artwork is a bright golden-hour scene, so the usual dark-theme
+   * text (white/gray) would wash out. Inside .hero we flip to dark ink on
+   * the pale sky — mirroring classic light landing pages. :global() is
+   * required for parts rendered by child components (InstallPill). */
+  .hero :global(.badge) {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: transparent;
+    color: #27272a;
+    box-shadow: 0 2px 12px rgba(80, 50, 10, 0.22);
+  }
+
+  .hero h1 {
+    color: #1c2431;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .hero h1 :global(.text-gradient) {
+    background: linear-gradient(92deg, #6d28d9, #1d4ed8 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero .sub {
+    color: #44403c;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+
+  .hero .btn:not(.btn-primary) {
+    background: rgba(255, 255, 255, 0.92);
+    color: #27272a;
+    border-color: rgba(30, 20, 5, 0.12);
+    box-shadow: 0 2px 12px rgba(80, 50, 10, 0.18);
+  }
+
+  .hero .btn:not(.btn-primary):hover {
+    background: #ffffff;
+    border-color: rgba(30, 20, 5, 0.2);
+  }
+
+  .hero .btn-primary {
+    background: #18181b;
+    color: #ffffff;
+    border-color: #18181b;
+  }
+
+  .hero .btn-primary:hover {
+    background: #2d2d33;
+    border-color: #2d2d33;
+  }
+
+  .hero :global(.install-pill) {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(30, 20, 5, 0.12);
+    box-shadow: 0 2px 12px rgba(80, 50, 10, 0.18);
+  }
+
+  .hero :global(.install-pill code) {
+    color: #b45309;
+  }
+
+  .hero :global(.install-pill .copy-btn) {
+    color: #78716c;
+  }
+
+  .hero :global(.install-pill .copy-btn:hover) {
+    color: #292524;
+    background: rgba(30, 20, 5, 0.06);
+  }
+
+  .hero .hint {
+    color: #57534e;
   }
 
   .hero-content {

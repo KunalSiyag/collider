@@ -9,12 +9,24 @@ interface Props {
 }
 
 const { code, lang = 'ts', filename } = Astro.props;
+
+/* Download link: a data: URL means the file is generated entirely in the
+ * browser — no server round-trip, works on any static host. The `download`
+ * attribute makes browsers save it under `filename` instead of navigating. */
+const downloadHref = `data:text/plain;charset=utf-8,${encodeURIComponent(code)}`;
+const downloadName = filename ?? `element.${lang}`;
 ---
 
 <div class="codeblock">
   <div class="codeblock-header">
     <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-    <span class="filename">{filename ?? `element.${lang}`}</span>
+    <span class="filename">{downloadName}</span>
+    <a class="dl-btn" href={downloadHref} download={downloadName} aria-label={`Download ${downloadName}`}>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path>
+      </svg>
+      <span>Download</span>
+    </a>
     <button class="copy-btn" type="button" aria-label="Copy code">
       <CopyIcon size={13} />
       <span>Copy</span>
@@ -61,7 +73,8 @@ const { code, lang = 'ts', filename } = Astro.props;
     margin-inline-end: auto;
   }
 
-  .copy-btn {
+  .copy-btn,
+  .dl-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -76,7 +89,8 @@ const { code, lang = 'ts', filename } = Astro.props;
       background 150ms ease;
   }
 
-  .copy-btn:hover {
+  .copy-btn:hover,
+  .dl-btn:hover {
     color: var(--foreground);
     background: rgba(255, 255, 255, 0.06);
   }

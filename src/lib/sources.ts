@@ -55,6 +55,10 @@ import { createAuroraLake } from '../scenes/aurora-lake';
 import { createBeachDay } from '../scenes/beach-day';
 import { createCountrysideNight } from '../scenes/countryside-night';
 import { createDesertDunes } from '../scenes/desert-dunes';
+import { createPixelPlatformer } from '../scenes/pixel-platformer';
+import { createBlockWorld } from '../scenes/block-world';
+import { createSakuraHill } from '../scenes/sakura-hill';
+import { createArcticNight } from '../scenes/arctic-night';
 
 // Scenic vector art.
 import { createBalloonFestival } from '../vector/balloon-festival';
@@ -1759,6 +1763,10 @@ export const sources: Record<string, string> = {
   'beach-day': createBeachDay(),
   'countryside-night': createCountrysideNight(),
   'desert-dunes': createDesertDunes(),
+  'pixel-platformer': createPixelPlatformer(),
+  'block-world': createBlockWorld(),
+  'sakura-hill': createSakuraHill(),
+  'arctic-night': createArcticNight(),
   'balloon-festival': createBalloonFestival(),
   'cable-car-line': createCableCarLine(),
   'camp-night': createCampNight(),
