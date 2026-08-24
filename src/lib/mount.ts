@@ -41,6 +41,41 @@ type Factory = (container: HTMLElement, options?: Record<string, unknown>) => Di
 /* slug -> lazy module loader. Every dynamic import here becomes a separate
  * chunk in the build. Keep keys in sync with registry.ts slugs. */
 const loaders: Record<string, () => Promise<Factory>> = {
+  // Quality-wave additions.
+  'loader-honeycomb': async () =>
+    (await import('../loaders/loader-honeycomb')).createLoaderHoneycomb as unknown as Factory,
+  'loader-sunrise': async () =>
+    (await import('../loaders/loader-sunrise')).createLoaderSunrise as unknown as Factory,
+  'loader-shuffle': async () =>
+    (await import('../loaders/loader-shuffle')).createLoaderShuffle as unknown as Factory,
+  'button-progress-fill': async () =>
+    (await import('../buttons/button-progress-fill')).createProgressFillButton as unknown as Factory,
+  'button-flip-confirm': async () =>
+    (await import('../buttons/button-flip-confirm')).createFlipConfirmButton as unknown as Factory,
+  'effect-aurora-text': async () =>
+    (await import('../effects/effect-aurora-text')).createAuroraText as unknown as Factory,
+  'effect-magnetic-card': async () =>
+    (await import('../effects/effect-magnetic-card')).createMagneticCard as unknown as Factory,
+  'motion-elastic-tooltip': async () =>
+    (await import('../motions/motion-elastic-tooltip')).createElasticTooltip as unknown as Factory,
+  'motion-bounce-badge': async () =>
+    (await import('../motions/motion-bounce-badge')).createBounceBadge as unknown as Factory,
+  'd25-coin-stack': async () =>
+    (await import('../d25/d25-coin-stack')).createCoinStack as unknown as Factory,
+  'd25-stair-shadow': async () =>
+    (await import('../d25/d25-stair-shadow')).createStairShadow as unknown as Factory,
+  'rain-ripples': async () =>
+    (await import('../elements/rain-ripples')).createRainRipples as unknown as Factory,
+  'aurora-waves': async () =>
+    (await import('../elements/aurora-waves')).createAuroraWaves as unknown as Factory,
+  'paper-crane-3d': async () =>
+    (await import('../elements/paper-crane-3d')).createPaperCrane3D as unknown as Factory,
+  'hourglass-3d': async () =>
+    (await import('../elements/hourglass-3d')).createHourglass3D as unknown as Factory,
+  'neon-city-hero': async () =>
+    (await import('../elements/neon-city-hero')).createNeonCityHero as unknown as Factory,
+  'murmuration-hero': async () =>
+    (await import('../elements/murmuration-hero')).createMurmurationHero as unknown as Factory,
   'particle-field': async () =>
     (await import('../elements/particle-field')).createParticleField as unknown as Factory,
   'wave-plane': async () =>

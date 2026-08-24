@@ -12268,6 +12268,189 @@ export const elements: ElementMeta[] = [
     kind: 'vector',
     keywords: ['wind', 'turbine', 'energy', 'hills'],
   },
+  // ---- Quality wave: 37 new elements across every category ----
+  {
+    slug: 'coral-reef', name: 'Coral Reef',
+    description: 'Light shafts, schooling fish and swaying coral fans underwater.',
+    category: 'Scenes', kind: 'vector', keywords: ['scene', 'ocean', 'fish', 'underwater', 'coral'],
+  },
+  {
+    slug: 'vineyard-hill', name: 'Vineyard Hill',
+    description: 'Tuscan vine rows climbing hills toward a sunlit villa.',
+    category: 'Scenes', kind: 'vector', keywords: ['scene', 'tuscany', 'vineyard', 'villa', 'countryside'],
+  },
+  {
+    slug: 'storm-plains', name: 'Storm Plains',
+    description: 'Grassland bending under a thunderstorm with forked lightning.',
+    category: 'Scenes', kind: 'vector', keywords: ['scene', 'storm', 'lightning', 'grass', 'dramatic'],
+  },
+  {
+    slug: 'bamboo-path', name: 'Bamboo Path',
+    description: 'Misty bamboo grove with glowing lanterns on stepping stones.',
+    category: 'Scenes', kind: 'vector', keywords: ['scene', 'bamboo', 'zen', 'lantern', 'mist', 'japan'],
+  },
+  {
+    slug: 'harbor-dusk', name: 'Harbor Dusk',
+    description: 'Fishing boats rocking at a pier beneath a sweeping lighthouse beam.',
+    category: 'Scenes', kind: 'vector', keywords: ['scene', 'harbor', 'boats', 'lighthouse', 'dusk', 'sea'],
+  },
+  {
+    slug: 'canyon-mesa', name: 'Canyon Mesa',
+    description: 'Monument-valley mesas with ravens circling at golden hour.',
+    category: 'Scenes', kind: 'vector', keywords: ['scene', 'canyon', 'desert', 'mesa', 'southwest'],
+  },
+  {
+    slug: 'windmill-valley', name: 'Windmill Valley',
+    description: 'Dutch windmills turning above tulip fields and a canal.',
+    category: 'Vector', kind: 'vector', keywords: ['windmill', 'tulips', 'holland', 'canal'],
+  },
+  {
+    slug: 'koi-pond', name: 'Koi Pond',
+    description: 'Top-down koi gliding between lily pads and light ripples.',
+    category: 'Vector', kind: 'vector', keywords: ['koi', 'pond', 'fish', 'zen', 'lily'],
+  },
+  {
+    slug: 'storm-lighthouse', name: 'Storm Lighthouse',
+    description: 'A lighthouse holding against crashing waves in driving rain.',
+    category: 'Vector', kind: 'vector', keywords: ['lighthouse', 'storm', 'waves', 'night', 'rain'],
+  },
+  {
+    slug: 'shape-wave-stack', name: 'Wave Stack',
+    description: 'Offset wave bands breathing out of phase in layered color.',
+    category: 'Shapes', kind: 'vector', keywords: ['waves', 'bands', 'layers', 'flow'],
+  },
+  {
+    slug: 'shape-diamond-lattice', name: 'Diamond Lattice',
+    description: 'Interlocking diamond grid with a traveling shimmer.',
+    category: 'Shapes', kind: 'vector', keywords: ['diamond', 'lattice', 'grid', 'shimmer'],
+  },
+  {
+    slug: 'shape-orbit-dots', name: 'Orbit Dots',
+    description: 'Concentric dot rings with satellites circling at odd speeds.',
+    category: 'Shapes', kind: 'vector', keywords: ['orbits', 'dots', 'rings', 'satellites'],
+  },
+  {
+    slug: 'texture-canvas-weave', name: 'Canvas Weave',
+    description: 'Coarse artist canvas with a warm primed sheen.',
+    category: 'Textures', kind: 'vector', keywords: ['canvas', 'art', 'texture', 'primer'],
+  },
+  {
+    slug: 'iso-ferry-dock', name: 'Iso Ferry Dock',
+    description: 'A ferry bobbing at a wooden dock with waiting passengers.',
+    category: 'Isometric', kind: 'vector', keywords: ['isometric', 'ferry', 'dock', 'harbor'],
+  },
+  {
+    slug: 'iso-attic-room', name: 'Iso Attic Room',
+    description: 'Cozy attic hideout with skylight beam, string lights and a reading chair.',
+    category: 'Isometric', kind: 'vector', keywords: ['isometric', 'attic', 'room', 'cozy', 'skylight'],
+  },
+  {
+    slug: 'monster-frostling', name: 'Frostling',
+    description: 'An ice-type chibi with a crystal crown and frozen breath.',
+    category: 'Monsters', kind: 'vector', keywords: ['monster', 'ice', 'chibi', 'crystal'],
+  },
+  {
+    slug: 'monster-gustling', name: 'Gustling',
+    description: 'A wind-type cloud chibi riding its own swirl of leaves.',
+    category: 'Monsters', kind: 'vector', keywords: ['monster', 'wind', 'cloud', 'chibi'],
+  },
+  {
+    slug: 'elemental-emberwing', name: 'Emberwing Elemental',
+    description: 'A phoenix-like flame spirit with beating fire wings and rising embers.',
+    category: 'Elementals', kind: 'vector', keywords: ['elemental', 'fire', 'phoenix', 'embers'],
+  },
+  {
+    slug: 'elemental-mossheart', name: 'Mossheart Elemental',
+    description: 'A forest golem with blooming moss, glowing heart and fireflies.',
+    category: 'Elementals', kind: 'vector', keywords: ['elemental', 'forest', 'moss', 'golem', 'fireflies'],
+  },
+  {
+    slug: 'loader-honeycomb', name: 'Honeycomb Loader',
+    description: 'Hex cells filling with amber in a rolling wave.',
+    category: 'Loaders', kind: 'motion', keywords: ['loader', 'hex', 'honeycomb', 'amber'],
+  },
+  {
+    slug: 'loader-sunrise', name: 'Sunrise Loader',
+    description: 'A sun climbing over the horizon with a ray flash before each loop.',
+    category: 'Loaders', kind: 'motion', keywords: ['loader', 'sun', 'sunrise', 'horizon'],
+  },
+  {
+    slug: 'loader-shuffle', name: 'Shuffle Loader',
+    description: 'Four colored tiles sliding around a 2×2 grid forever.',
+    category: 'Loaders', kind: 'motion', keywords: ['loader', 'tiles', 'shuffle', 'grid'],
+  },
+  {
+    slug: 'button-progress-fill', name: 'Progress Fill Button',
+    description: 'Click to sweep a gradient fill behind the label, then reset.',
+    category: 'Buttons', kind: 'motion', keywords: ['button', 'progress', 'loading', 'cta'],
+  },
+  {
+    slug: 'button-flip-confirm', name: 'Flip Confirm Button',
+    description: 'Flips in 3D to a confirmed checkmark state, then returns.',
+    category: 'Buttons', kind: 'motion', keywords: ['button', 'flip', '3d', 'confirm'],
+  },
+  {
+    slug: 'effect-aurora-text', name: 'Aurora Text',
+    description: 'A flowing gradient sheen endlessly sweeping through a headline.',
+    category: 'Effects', kind: 'motion', keywords: ['text', 'gradient', 'aurora', 'headline'],
+  },
+  {
+    slug: 'effect-magnetic-card', name: 'Magnetic Card',
+    description: 'Card leans toward the cursor with a radial glare that tracks it.',
+    category: 'Effects', kind: 'motion', keywords: ['card', 'tilt', 'glare', 'hover'],
+  },
+  {
+    slug: 'motion-elastic-tooltip', name: 'Elastic Tooltip',
+    description: 'Tooltips springing in with squash-and-stretch overshoot.',
+    category: 'Motion', kind: 'motion', keywords: ['tooltip', 'spring', 'elastic', 'hover'],
+    install: 'npm install gsap',
+  },
+  {
+    slug: 'motion-bounce-badge', name: 'Bounce Badge',
+    description: 'Notification badge that boings with overshoot on every count change.',
+    category: 'Motion', kind: 'motion', keywords: ['badge', 'notification', 'bounce', 'counter'],
+    install: 'npm install gsap',
+  },
+  {
+    slug: 'd25-coin-stack', name: 'Coin Stack',
+    description: 'Coins raining onto a stack with squash-and-stretch and depth shadow.',
+    category: '2.5D', kind: 'motion', keywords: ['coins', 'stack', 'drop', 'game'],
+  },
+  {
+    slug: 'd25-stair-shadow', name: 'Stair Shadow',
+    description: 'Stair steps lighting up as a glow sweeps across them.',
+    category: '2.5D', kind: 'motion', keywords: ['stairs', 'light', 'sweep', 'depth'],
+  },
+  {
+    slug: 'rain-ripples', name: 'Rain Ripples',
+    description: 'Raindrops falling onto water, each blooming an expanding ring.',
+    category: 'Backgrounds', kind: 'three', keywords: ['rain', 'ripples', 'water', 'calm'],
+  },
+  {
+    slug: 'aurora-waves', name: 'Aurora Waves',
+    description: 'Translucent light curtains rippling over a starfield in 3D.',
+    category: 'Backgrounds', kind: 'three', keywords: ['aurora', 'curtains', 'stars', 'shader'],
+  },
+  {
+    slug: 'paper-crane-3d', name: 'Paper Crane 3D',
+    description: 'A flat-shaded origami crane flapping gently in place.',
+    category: 'Objects', kind: 'three', keywords: ['origami', 'crane', 'paper', 'bird'],
+  },
+  {
+    slug: 'hourglass-3d', name: 'Hourglass 3D',
+    description: 'Grains streaming through a glass hourglass between wooden caps.',
+    category: 'Objects', kind: 'three', keywords: ['hourglass', 'sand', 'time', 'glass'],
+  },
+  {
+    slug: 'neon-city-hero', name: 'Neon City Hero',
+    description: 'A night skyline of lit windows flying past under pink neon glow.',
+    category: 'Heroes', kind: 'three', keywords: ['city', 'neon', 'night', 'skyline', 'hero'],
+  },
+  {
+    slug: 'murmuration-hero', name: 'Murmuration Hero',
+    description: 'A starling flock wheeling across a dusk-gradient sky.',
+    category: 'Heroes', kind: 'three', keywords: ['birds', 'flock', 'murmuration', 'dusk', 'hero'],
+  },
 ];
 
 export const categories: ElementCategory[] = [

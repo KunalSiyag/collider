@@ -69,6 +69,26 @@ import { createPaperBoats } from '../vector/paper-boats';
 import { createSailboatRegatta } from '../vector/sailboat-regatta';
 import { createWindFarm } from '../vector/wind-farm';
 
+// Quality-wave additions.
+import { createCoralReef } from '../scenes/coral-reef';import { createVineyardHill } from '../scenes/vineyard-hill';
+import { createStormPlains } from '../scenes/storm-plains';
+import { createBambooPath } from '../scenes/bamboo-path';
+import { createHarborDusk } from '../scenes/harbor-dusk';
+import { createCanyonMesa } from '../scenes/canyon-mesa';
+import { createWindmillValley } from '../vector/windmill-valley';
+import { createKoiPond } from '../vector/koi-pond';
+import { createStormLighthouse } from '../vector/storm-lighthouse';
+import { createWaveStack } from '../vector/shape-wave-stack';
+import { createDiamondLattice } from '../vector/shape-diamond-lattice';
+import { createOrbitDots } from '../vector/shape-orbit-dots';
+import { createCanvasWeave } from '../textures/texture-canvas-weave';
+import { createIsoFerryDock } from '../isometric/iso-ferry-dock';
+import { createIsoAtticRoom } from '../isometric/iso-attic-room';
+import { createFrostling } from '../monsters/monster-frostling';
+import { createGustling } from '../monsters/monster-gustling';
+import { createEmberwing } from '../elementals/elemental-emberwing';
+import { createMossheart } from '../elementals/elemental-mossheart';
+
 import { createIsoCubes } from '../isometric/iso-cube';
 import { createIsoTower } from '../isometric/iso-tower';
 import { createIsoServer } from '../isometric/iso-server';
@@ -1708,6 +1728,25 @@ import s_world_tree from '../elements/world-tree.ts?raw';
 import s_world_turtle from '../elements/world-turtle.ts?raw';
 import s_zodiac_wheel from '../elements/zodiac-wheel.ts?raw';
 
+// Quality-wave factory elements (source shown verbatim on their pages).
+import s_loader_honeycomb from '../loaders/loader-honeycomb.ts?raw';
+import s_loader_sunrise from '../loaders/loader-sunrise.ts?raw';
+import s_loader_shuffle from '../loaders/loader-shuffle.ts?raw';
+import s_button_progress_fill from '../buttons/button-progress-fill.ts?raw';
+import s_button_flip_confirm from '../buttons/button-flip-confirm.ts?raw';
+import s_effect_aurora_text from '../effects/effect-aurora-text.ts?raw';
+import s_effect_magnetic_card from '../effects/effect-magnetic-card.ts?raw';
+import s_motion_elastic_tooltip from '../motions/motion-elastic-tooltip.ts?raw';
+import s_motion_bounce_badge from '../motions/motion-bounce-badge.ts?raw';
+import s_d25_coin_stack from '../d25/d25-coin-stack.ts?raw';
+import s_d25_stair_shadow from '../d25/d25-stair-shadow.ts?raw';
+import s_rain_ripples from '../elements/rain-ripples.ts?raw';
+import s_aurora_waves from '../elements/aurora-waves.ts?raw';
+import s_paper_crane_3d from '../elements/paper-crane-3d.ts?raw';
+import s_hourglass_3d from '../elements/hourglass-3d.ts?raw';
+import s_neon_city_hero from '../elements/neon-city-hero.ts?raw';
+import s_murmuration_hero from '../elements/murmuration-hero.ts?raw';
+
 export const sources: Record<string, string> = {
   'particle-field': particleField,
   'wave-plane': wavePlane,
@@ -1774,6 +1813,25 @@ export const sources: Record<string, string> = {
   'paper-boats': createPaperBoats(),
   'sailboat-regatta': createSailboatRegatta(),
   'wind-farm': createWindFarm(),
+  'coral-reef': createCoralReef(),
+  'vineyard-hill': createVineyardHill(),
+  'storm-plains': createStormPlains(),
+  'bamboo-path': createBambooPath(),
+  'harbor-dusk': createHarborDusk(),
+  'canyon-mesa': createCanyonMesa(),
+  'windmill-valley': createWindmillValley(),
+  'koi-pond': createKoiPond(),
+  'storm-lighthouse': createStormLighthouse(),
+  'shape-wave-stack': createWaveStack(),
+  'shape-diamond-lattice': createDiamondLattice(),
+  'shape-orbit-dots': createOrbitDots(),
+  'texture-canvas-weave': createCanvasWeave(),
+  'iso-ferry-dock': createIsoFerryDock(),
+  'iso-attic-room': createIsoAtticRoom(),
+  'monster-frostling': createFrostling(),
+  'monster-gustling': createGustling(),
+  'elemental-emberwing': createEmberwing(),
+  'elemental-mossheart': createMossheart(),
   'iso-cube': createIsoCubes(),
   'iso-tower': createIsoTower(),
   'iso-server': createIsoServer(),
@@ -3396,6 +3454,23 @@ export const sources: Record<string, string> = {
   "world-tree": s_world_tree,
   "world-turtle": s_world_turtle,
   "zodiac-wheel": s_zodiac_wheel,
+  "loader-honeycomb": s_loader_honeycomb,
+  "loader-sunrise": s_loader_sunrise,
+  "loader-shuffle": s_loader_shuffle,
+  "button-progress-fill": s_button_progress_fill,
+  "button-flip-confirm": s_button_flip_confirm,
+  "effect-aurora-text": s_effect_aurora_text,
+  "effect-magnetic-card": s_effect_magnetic_card,
+  "motion-elastic-tooltip": s_motion_elastic_tooltip,
+  "motion-bounce-badge": s_motion_bounce_badge,
+  "d25-coin-stack": s_d25_coin_stack,
+  "d25-stair-shadow": s_d25_stair_shadow,
+  "rain-ripples": s_rain_ripples,
+  "aurora-waves": s_aurora_waves,
+  "paper-crane-3d": s_paper_crane_3d,
+  "hourglass-3d": s_hourglass_3d,
+  "neon-city-hero": s_neon_city_hero,
+  "murmuration-hero": s_murmuration_hero,
 };
 
 export function getSource(slug: string): string {
@@ -4203,4 +4278,21 @@ export const factoryNames: Record<string, string> = {
   "world-tree": "createWorldTree",
   "world-turtle": "createWorldTurtle",
   "zodiac-wheel": "createZodiacWheel",
+  "loader-honeycomb": "createLoaderHoneycomb",
+  "loader-sunrise": "createLoaderSunrise",
+  "loader-shuffle": "createLoaderShuffle",
+  "button-progress-fill": "createProgressFillButton",
+  "button-flip-confirm": "createFlipConfirmButton",
+  "effect-aurora-text": "createAuroraText",
+  "effect-magnetic-card": "createMagneticCard",
+  "motion-elastic-tooltip": "createElasticTooltip",
+  "motion-bounce-badge": "createBounceBadge",
+  "d25-coin-stack": "createCoinStack",
+  "d25-stair-shadow": "createStairShadow",
+  "rain-ripples": "createRainRipples",
+  "aurora-waves": "createAuroraWaves",
+  "paper-crane-3d": "createPaperCrane3D",
+  "hourglass-3d": "createHourglass3D",
+  "neon-city-hero": "createNeonCityHero",
+  "murmuration-hero": "createMurmurationHero",
 };
