@@ -41,6 +41,39 @@ type Factory = (container: HTMLElement, options?: Record<string, unknown>) => Di
 /* slug -> lazy module loader. Every dynamic import here becomes a separate
  * chunk in the build. Keep keys in sync with registry.ts slugs. */
 const loaders: Record<string, () => Promise<Factory>> = {
+  // Forms and nav factories.
+  'form-floating-label': async () =>
+    (await import('../forms/form-floating-label')).createFloatingLabelInput as unknown as Factory,
+  'form-search-expand': async () =>
+    (await import('../forms/form-search-expand')).createSearchExpand as unknown as Factory,
+  'form-otp-input': async () =>
+    (await import('../forms/form-otp-input')).createOtpInput as unknown as Factory,
+  'form-toggle-row': async () =>
+    (await import('../forms/form-toggle-row')).createToggleRow as unknown as Factory,
+  'form-range-slider': async () =>
+    (await import('../forms/form-range-slider')).createRangeSlider as unknown as Factory,
+  'form-checkbox-draw': async () =>
+    (await import('../forms/form-checkbox-draw')).createCheckboxDraw as unknown as Factory,
+  'form-radio-cards': async () =>
+    (await import('../forms/form-radio-cards')).createRadioCards as unknown as Factory,
+  'form-input-counter': async () =>
+    (await import('../forms/form-input-counter')).createInputCounter as unknown as Factory,
+  'nav-pill-nav': async () =>
+    (await import('../navs/nav-pill-nav')).createPillNav as unknown as Factory,
+  'nav-underline-tabs': async () =>
+    (await import('../navs/nav-underline-tabs')).createUnderlineTabs as unknown as Factory,
+  'nav-stepper': async () =>
+    (await import('../navs/nav-stepper')).createStepper as unknown as Factory,
+  'nav-dock-magnify': async () =>
+    (await import('../navs/nav-dock-magnify')).createDockMagnify as unknown as Factory,
+  'nav-breadcrumb': async () =>
+    (await import('../navs/nav-breadcrumb')).createBreadcrumb as unknown as Factory,
+  'nav-rail': async () =>
+    (await import('../navs/nav-rail')).createRailNav as unknown as Factory,
+  'nav-dots-pager': async () =>
+    (await import('../navs/nav-dots-pager')).createDotsPager as unknown as Factory,
+  'nav-burger-morph': async () =>
+    (await import('../navs/nav-burger-morph')).createBurgerMorph as unknown as Factory,
   // Quality-wave additions.
   'loader-honeycomb': async () =>
     (await import('../loaders/loader-honeycomb')).createLoaderHoneycomb as unknown as Factory,

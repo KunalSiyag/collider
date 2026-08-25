@@ -89,6 +89,34 @@ import { createGustling } from '../monsters/monster-gustling';
 import { createEmberwing } from '../elementals/elemental-emberwing';
 import { createMossheart } from '../elementals/elemental-mossheart';
 
+// Charts, icons and dividers (pure SVG generators).
+import { createAnimatedBars } from '../charts/chart-animated-bars';
+import { createLineDraw } from '../charts/chart-line-draw';
+import { createDonutChart } from '../charts/chart-donut';
+import { createRadialGauge } from '../charts/chart-radial-gauge';
+import { createSparkline } from '../charts/chart-sparkline';
+import { createAreaFlow } from '../charts/chart-area-flow';
+import { createHeatmapGrid } from '../charts/chart-heatmap-grid';
+import { createRadarChart } from '../charts/chart-radar';
+import { createStackedBars } from '../charts/chart-stacked-bars';
+import { createProgressRings } from '../charts/chart-progress-rings';
+import { createWifiPulse } from '../icons/icon-wifi-pulse';
+import { createBatteryCharge } from '../icons/icon-battery-charge';
+import { createBluetoothPing } from '../icons/icon-bluetooth-ping';
+import { createVolumeWave } from '../icons/icon-volume-wave';
+import { createSyncRotate } from '../icons/icon-sync-rotate';
+import { createLocationPulse } from '../icons/icon-location-pulse';
+import { createHeartBeat } from '../icons/icon-heart-beat';
+import { createCloudSync } from '../icons/icon-cloud-sync';
+import { createGradientFade } from '../dividers/divider-gradient-fade';
+import { createTornPaper } from '../dividers/divider-torn-paper';
+import { createCircuitDivider } from '../dividers/divider-circuit';
+import { createDotsFade } from '../dividers/divider-dots-fade';
+import { createSlashCut } from '../dividers/divider-slash-cut';
+import { createPulseLine } from '../dividers/divider-pulse-line';
+import { createRibbonSwoosh } from '../dividers/divider-ribbon-swoosh';
+import { createSkylineDivider } from '../dividers/divider-skyline';
+
 import { createIsoCubes } from '../isometric/iso-cube';
 import { createIsoTower } from '../isometric/iso-tower';
 import { createIsoServer } from '../isometric/iso-server';
@@ -1747,6 +1775,24 @@ import s_hourglass_3d from '../elements/hourglass-3d.ts?raw';
 import s_neon_city_hero from '../elements/neon-city-hero.ts?raw';
 import s_murmuration_hero from '../elements/murmuration-hero.ts?raw';
 
+// Forms and nav factories.
+import s_form_floating_label from '../forms/form-floating-label.ts?raw';
+import s_form_search_expand from '../forms/form-search-expand.ts?raw';
+import s_form_otp_input from '../forms/form-otp-input.ts?raw';
+import s_form_toggle_row from '../forms/form-toggle-row.ts?raw';
+import s_form_range_slider from '../forms/form-range-slider.ts?raw';
+import s_form_checkbox_draw from '../forms/form-checkbox-draw.ts?raw';
+import s_form_radio_cards from '../forms/form-radio-cards.ts?raw';
+import s_form_input_counter from '../forms/form-input-counter.ts?raw';
+import s_nav_pill_nav from '../navs/nav-pill-nav.ts?raw';
+import s_nav_underline_tabs from '../navs/nav-underline-tabs.ts?raw';
+import s_nav_stepper from '../navs/nav-stepper.ts?raw';
+import s_nav_dock_magnify from '../navs/nav-dock-magnify.ts?raw';
+import s_nav_breadcrumb from '../navs/nav-breadcrumb.ts?raw';
+import s_nav_rail from '../navs/nav-rail.ts?raw';
+import s_nav_dots_pager from '../navs/nav-dots-pager.ts?raw';
+import s_nav_burger_morph from '../navs/nav-burger-morph.ts?raw';
+
 export const sources: Record<string, string> = {
   'particle-field': particleField,
   'wave-plane': wavePlane,
@@ -1832,6 +1878,32 @@ export const sources: Record<string, string> = {
   'monster-gustling': createGustling(),
   'elemental-emberwing': createEmberwing(),
   'elemental-mossheart': createMossheart(),
+  'chart-animated-bars': createAnimatedBars(),
+  'chart-line-draw': createLineDraw(),
+  'chart-donut': createDonutChart(),
+  'chart-radial-gauge': createRadialGauge(),
+  'chart-sparkline': createSparkline(),
+  'chart-area-flow': createAreaFlow(),
+  'chart-heatmap-grid': createHeatmapGrid(),
+  'chart-radar': createRadarChart(),
+  'chart-stacked-bars': createStackedBars(),
+  'chart-progress-rings': createProgressRings(),
+  'icon-wifi-pulse': createWifiPulse(),
+  'icon-battery-charge': createBatteryCharge(),
+  'icon-bluetooth-ping': createBluetoothPing(),
+  'icon-volume-wave': createVolumeWave(),
+  'icon-sync-rotate': createSyncRotate(),
+  'icon-location-pulse': createLocationPulse(),
+  'icon-heart-beat': createHeartBeat(),
+  'icon-cloud-sync': createCloudSync(),
+  'divider-gradient-fade': createGradientFade(),
+  'divider-torn-paper': createTornPaper(),
+  'divider-circuit': createCircuitDivider(),
+  'divider-dots-fade': createDotsFade(),
+  'divider-slash-cut': createSlashCut(),
+  'divider-pulse-line': createPulseLine(),
+  'divider-ribbon-swoosh': createRibbonSwoosh(),
+  'divider-skyline': createSkylineDivider(),
   'iso-cube': createIsoCubes(),
   'iso-tower': createIsoTower(),
   'iso-server': createIsoServer(),
@@ -3471,6 +3543,22 @@ export const sources: Record<string, string> = {
   "hourglass-3d": s_hourglass_3d,
   "neon-city-hero": s_neon_city_hero,
   "murmuration-hero": s_murmuration_hero,
+  "form-floating-label": s_form_floating_label,
+  "form-search-expand": s_form_search_expand,
+  "form-otp-input": s_form_otp_input,
+  "form-toggle-row": s_form_toggle_row,
+  "form-range-slider": s_form_range_slider,
+  "form-checkbox-draw": s_form_checkbox_draw,
+  "form-radio-cards": s_form_radio_cards,
+  "form-input-counter": s_form_input_counter,
+  "nav-pill-nav": s_nav_pill_nav,
+  "nav-underline-tabs": s_nav_underline_tabs,
+  "nav-stepper": s_nav_stepper,
+  "nav-dock-magnify": s_nav_dock_magnify,
+  "nav-breadcrumb": s_nav_breadcrumb,
+  "nav-rail": s_nav_rail,
+  "nav-dots-pager": s_nav_dots_pager,
+  "nav-burger-morph": s_nav_burger_morph,
 };
 
 export function getSource(slug: string): string {
@@ -4295,4 +4383,20 @@ export const factoryNames: Record<string, string> = {
   "hourglass-3d": "createHourglass3D",
   "neon-city-hero": "createNeonCityHero",
   "murmuration-hero": "createMurmurationHero",
+  "form-floating-label": "createFloatingLabelInput",
+  "form-search-expand": "createSearchExpand",
+  "form-otp-input": "createOtpInput",
+  "form-toggle-row": "createToggleRow",
+  "form-range-slider": "createRangeSlider",
+  "form-checkbox-draw": "createCheckboxDraw",
+  "form-radio-cards": "createRadioCards",
+  "form-input-counter": "createInputCounter",
+  "nav-pill-nav": "createPillNav",
+  "nav-underline-tabs": "createUnderlineTabs",
+  "nav-stepper": "createStepper",
+  "nav-dock-magnify": "createDockMagnify",
+  "nav-breadcrumb": "createBreadcrumb",
+  "nav-rail": "createRailNav",
+  "nav-dots-pager": "createDotsPager",
+  "nav-burger-morph": "createBurgerMorph",
 };

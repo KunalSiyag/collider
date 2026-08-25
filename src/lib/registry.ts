@@ -1,6 +1,11 @@
 export type ElementCategory =
   | 'Backgrounds'
   | 'Scenes'
+  | 'Charts'
+  | 'Icons'
+  | 'Forms'
+  | 'Nav'
+  | 'Dividers'
   | 'Objects'
   | 'Heroes'
   | 'Loaders'
@@ -12451,6 +12456,217 @@ export const elements: ElementMeta[] = [
     description: 'A starling flock wheeling across a dusk-gradient sky.',
     category: 'Heroes', kind: 'three', keywords: ['birds', 'flock', 'murmuration', 'dusk', 'hero'],
   },
+  // ---- New sections: Charts, Icons, Forms, Nav, Dividers ----
+  {
+    slug: 'chart-animated-bars', name: 'Animated Bars',
+    description: 'Bars rising to value with a soft grid, labels and staggered easing.',
+    category: 'Charts', kind: 'vector', keywords: ['chart', 'bars', 'graph', 'data'],
+  },
+  {
+    slug: 'chart-line-draw', name: 'Line Draw',
+    description: 'A smooth line chart that draws itself with a trailing pulse dot.',
+    category: 'Charts', kind: 'vector', keywords: ['chart', 'line', 'trend', 'graph'],
+  },
+  {
+    slug: 'chart-donut', name: 'Donut Chart',
+    description: 'Segments sweeping in around a center stat with a clean legend.',
+    category: 'Charts', kind: 'vector', keywords: ['chart', 'donut', 'pie', 'share'],
+  },
+  {
+    slug: 'chart-radial-gauge', name: 'Radial Gauge',
+    description: 'A 240° gauge filling toward a target with tick marks.',
+    category: 'Charts', kind: 'vector', keywords: ['chart', 'gauge', 'meter', 'kpi'],
+  },
+  {
+    slug: 'chart-sparkline', name: 'Sparkline',
+    description: 'A tiny inline trend line with a pulsing end dot for stat cards.',
+    category: 'Charts', kind: 'vector', keywords: ['chart', 'sparkline', 'trend', 'mini'],
+  },
+  {
+    slug: 'chart-area-flow', name: 'Area Flow',
+    description: 'Two smooth series revealing left-to-right with a looping scan line.',
+    category: 'Charts', kind: 'vector', keywords: ['chart', 'area', 'series', 'dashboard'],
+  },
+  {
+    slug: 'chart-heatmap-grid', name: 'Heatmap Grid',
+    description: 'Contribution-style grid with staggered pops and streak bursts.',
+    category: 'Charts', kind: 'vector', keywords: ['chart', 'heatmap', 'activity', 'calendar'],
+  },
+  {
+    slug: 'chart-radar', name: 'Radar Chart',
+    description: 'A capability polygon blooming over a six-axis web.',
+    category: 'Charts', kind: 'vector', keywords: ['chart', 'radar', 'spider', 'compare'],
+  },
+  {
+    slug: 'chart-stacked-bars', name: 'Stacked Bars',
+    description: 'Horizontal stacked segments animating out with per-row stagger.',
+    category: 'Charts', kind: 'vector', keywords: ['chart', 'stacked', 'segments', 'breakdown'],
+  },
+  {
+    slug: 'chart-progress-rings', name: 'Progress Rings',
+    description: 'A trio of KPI rings filling to their targets with count-up labels.',
+    category: 'Charts', kind: 'vector', keywords: ['chart', 'rings', 'kpi', 'progress'],
+  },
+  {
+    slug: 'icon-wifi-pulse', name: 'Wifi Pulse',
+    description: 'Signal arcs radiating outward over a blinking status dot.',
+    category: 'Icons', kind: 'vector', keywords: ['icon', 'wifi', 'signal', 'status'],
+  },
+  {
+    slug: 'icon-battery-charge', name: 'Battery Charge',
+    description: 'A battery filling cell by cell, flashing full, then resetting.',
+    category: 'Icons', kind: 'vector', keywords: ['icon', 'battery', 'charge', 'power'],
+  },
+  {
+    slug: 'icon-bluetooth-ping', name: 'Bluetooth Ping',
+    description: 'The bluetooth rune wrapped by expanding connection pings.',
+    category: 'Icons', kind: 'vector', keywords: ['icon', 'bluetooth', 'connect', 'pairing'],
+  },
+  {
+    slug: 'icon-volume-wave', name: 'Volume Wave',
+    description: 'Speaker bars pulsing like an audio level meter.',
+    category: 'Icons', kind: 'vector', keywords: ['icon', 'volume', 'audio', 'equalizer'],
+  },
+  {
+    slug: 'icon-sync-rotate', name: 'Sync Rotate',
+    description: 'Two arrows chasing each other in a refresh cycle.',
+    category: 'Icons', kind: 'vector', keywords: ['icon', 'sync', 'refresh', 'update'],
+  },
+  {
+    slug: 'icon-location-pulse', name: 'Location Pulse',
+    description: 'A map pin dropping onto its own radiating ripple.',
+    category: 'Icons', kind: 'vector', keywords: ['icon', 'location', 'pin', 'map'],
+  },
+  {
+    slug: 'icon-heart-beat', name: 'Heart Beat',
+    description: 'A heart pulsing over a looping EKG trace.',
+    category: 'Icons', kind: 'vector', keywords: ['icon', 'heart', 'health', 'ekg'],
+  },
+  {
+    slug: 'icon-cloud-sync', name: 'Cloud Sync',
+    description: 'A cloud outline with arrows cycling through it.',
+    category: 'Icons', kind: 'vector', keywords: ['icon', 'cloud', 'sync', 'upload'],
+  },
+  {
+    slug: 'form-floating-label', name: 'Floating Label Input',
+    description: 'A text field whose label glides into the border on focus.',
+    category: 'Forms', kind: 'motion', keywords: ['form', 'input', 'field', 'label'],
+  },
+  {
+    slug: 'form-search-expand', name: 'Search Expand',
+    description: 'A collapsed search icon that unfurls into a full field.',
+    category: 'Forms', kind: 'motion', keywords: ['form', 'search', 'expand', 'input'],
+  },
+  {
+    slug: 'form-otp-input', name: 'OTP Input',
+    description: 'Six digit boxes with auto-advance, backspace and paste support.',
+    category: 'Forms', kind: 'motion', keywords: ['form', 'otp', 'code', 'verify'],
+  },
+  {
+    slug: 'form-toggle-row', name: 'Toggle Row',
+    description: 'A settings row with a springy, accessible switch.',
+    category: 'Forms', kind: 'motion', keywords: ['form', 'toggle', 'switch', 'settings'],
+  },
+  {
+    slug: 'form-range-slider', name: 'Range Slider',
+    description: 'A filled track with a value bubble riding the thumb.',
+    category: 'Forms', kind: 'motion', keywords: ['form', 'slider', 'range', 'value'],
+  },
+  {
+    slug: 'form-checkbox-draw', name: 'Checkbox Draw',
+    description: 'A checkbox whose checkmark draws itself with stroke motion.',
+    category: 'Forms', kind: 'motion', keywords: ['form', 'checkbox', 'check', 'consent'],
+  },
+  {
+    slug: 'form-radio-cards', name: 'Radio Cards',
+    description: 'Selectable plan cards acting as an accessible radio group.',
+    category: 'Forms', kind: 'motion', keywords: ['form', 'radio', 'cards', 'pricing', 'select'],
+  },
+  {
+    slug: 'form-input-counter', name: 'Input Counter',
+    description: 'A textarea with a live character ring that warms toward the limit.',
+    category: 'Forms', kind: 'motion', keywords: ['form', 'textarea', 'counter', 'limit'],
+  },
+  {
+    slug: 'nav-pill-nav', name: 'Pill Nav',
+    description: 'A sliding pill indicator that glides between nav items.',
+    category: 'Nav', kind: 'motion', keywords: ['nav', 'tabs', 'pill', 'menu'],
+  },
+  {
+    slug: 'nav-underline-tabs', name: 'Underline Tabs',
+    description: 'Tabs with an underline that stretches between items.',
+    category: 'Nav', kind: 'motion', keywords: ['nav', 'tabs', 'underline', 'menu'],
+  },
+  {
+    slug: 'nav-stepper', name: 'Stepper',
+    description: 'Numbered checkout steps lighting up with connecting progress.',
+    category: 'Nav', kind: 'motion', keywords: ['nav', 'stepper', 'checkout', 'progress'],
+  },
+  {
+    slug: 'nav-dock-magnify', name: 'Dock Magnify',
+    description: 'A macOS-style dock whose icons swell near the cursor.',
+    category: 'Nav', kind: 'motion', keywords: ['nav', 'dock', 'magnify', 'launcher'],
+  },
+  {
+    slug: 'nav-breadcrumb', name: 'Breadcrumb',
+    description: 'Crumbs with a chevron slide-in on the active segment.',
+    category: 'Nav', kind: 'motion', keywords: ['nav', 'breadcrumb', 'path', 'hierarchy'],
+  },
+  {
+    slug: 'nav-rail', name: 'Rail Nav',
+    description: 'A slim vertical rail with tooltips and an active indicator dot.',
+    category: 'Nav', kind: 'motion', keywords: ['nav', 'rail', 'sidebar', 'vertical'],
+  },
+  {
+    slug: 'nav-dots-pager', name: 'Dots Pager',
+    description: 'Carousel dots that stretch the active one, with auto-advance.',
+    category: 'Nav', kind: 'motion', keywords: ['nav', 'dots', 'pager', 'carousel'],
+  },
+  {
+    slug: 'nav-burger-morph', name: 'Burger Morph',
+    description: 'A hamburger that fluidly morphs into a cross on toggle.',
+    category: 'Nav', kind: 'motion', keywords: ['nav', 'burger', 'hamburger', 'menu'],
+  },
+  {
+    slug: 'divider-gradient-fade', name: 'Gradient Fade',
+    description: 'A soft rule dissolving from accent to transparent at both ends.',
+    category: 'Dividers', kind: 'vector', keywords: ['divider', 'line', 'gradient', 'separator'],
+  },
+  {
+    slug: 'divider-torn-paper', name: 'Torn Paper',
+    description: 'A ragged torn-edge separator with a shadowed underside.',
+    category: 'Dividers', kind: 'vector', keywords: ['divider', 'torn', 'paper', 'edge'],
+  },
+  {
+    slug: 'divider-circuit', name: 'Circuit Divider',
+    description: 'PCB traces with pads and signal pulses racing along them.',
+    category: 'Dividers', kind: 'vector', keywords: ['divider', 'circuit', 'pcb', 'tech'],
+  },
+  {
+    slug: 'divider-dots-fade', name: 'Dots Fade',
+    description: 'A dot grid dissolving from a dense spine to sparse edges.',
+    category: 'Dividers', kind: 'vector', keywords: ['divider', 'dots', 'grid', 'fade'],
+  },
+  {
+    slug: 'divider-slash-cut', name: 'Slash Cut',
+    description: 'An angled panel cut with a glowing accent edge.',
+    category: 'Dividers', kind: 'vector', keywords: ['divider', 'slash', 'angle', 'cut'],
+  },
+  {
+    slug: 'divider-pulse-line', name: 'Pulse Line',
+    description: 'A flat rule with a heartbeat spike and a traveling spark.',
+    category: 'Dividers', kind: 'vector', keywords: ['divider', 'pulse', 'heartbeat', 'spark'],
+  },
+  {
+    slug: 'divider-ribbon-swoosh', name: 'Ribbon Swoosh',
+    description: 'Two silky ribbons crossing the seam in slow opposing arcs.',
+    category: 'Dividers', kind: 'vector', keywords: ['divider', 'ribbon', 'swoosh', 'silk'],
+  },
+  {
+    slug: 'divider-skyline', name: 'Skyline Divider',
+    description: 'A city silhouette strip with twinkling window lights.',
+    category: 'Dividers', kind: 'vector', keywords: ['divider', 'skyline', 'city', 'night'],
+  },
 ];
 
 export const categories: ElementCategory[] = [
@@ -12462,6 +12678,11 @@ export const categories: ElementCategory[] = [
   'Elementals',
   'Backgrounds',
   'Scenes',
+  'Charts',
+  'Icons',
+  'Forms',
+  'Nav',
+  'Dividers',
   'Objects',
   'Heroes',
   'Vector',
