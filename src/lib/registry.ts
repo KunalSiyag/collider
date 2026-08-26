@@ -6,6 +6,14 @@ export type ElementCategory =
   | 'Forms'
   | 'Nav'
   | 'Dividers'
+  | 'Badges'
+  | 'Timelines'
+  | 'Cards'
+  | 'Pricing'
+  | 'Overlays'
+  | 'Empty States'
+  | 'Tables'
+  | 'Tooltips'
   | 'Objects'
   | 'Heroes'
   | 'Loaders'
@@ -12667,6 +12675,308 @@ export const elements: ElementMeta[] = [
     description: 'A city silhouette strip with twinkling window lights.',
     category: 'Dividers', kind: 'vector', keywords: ['divider', 'skyline', 'city', 'night'],
   },
+  // ---- New sections: Badges, Timelines, Cards, Pricing ----
+  {
+    slug: 'badge-status', name: 'Status Badge',
+    description: 'A presence pill with a breathing dot in four availability tones.',
+    category: 'Badges', kind: 'vector', keywords: ['badge', 'status', 'presence', 'online'],
+  },
+  {
+    slug: 'badge-verified', name: 'Verified Badge',
+    description: 'A seal with a check that draws in and a subtle breathing glow.',
+    category: 'Badges', kind: 'vector', keywords: ['badge', 'verified', 'check', 'trust'],
+  },
+  {
+    slug: 'badge-live', name: 'Live Indicator',
+    description: 'An on-air badge with a blinking recording dot.',
+    category: 'Badges', kind: 'vector', keywords: ['badge', 'live', 'recording', 'stream'],
+  },
+  {
+    slug: 'badge-level-medal', name: 'Level Medal',
+    description: 'A rank medal with ribbon, shine sweep and level number.',
+    category: 'Badges', kind: 'vector', keywords: ['badge', 'medal', 'level', 'gamification'],
+  },
+  {
+    slug: 'badge-price-tag', name: 'Price Tag',
+    description: 'A swinging sale tag with a discount punch.',
+    category: 'Badges', kind: 'vector', keywords: ['badge', 'sale', 'tag', 'discount'],
+  },
+  {
+    slug: 'badge-beta-pill', name: 'Beta Pill',
+    description: 'A rounded BETA chip with a scanning shimmer.',
+    category: 'Badges', kind: 'vector', keywords: ['badge', 'beta', 'pill', 'preview'],
+  },
+  {
+    slug: 'badge-count', name: 'Count Badge',
+    description: 'A notification counter that ticks up with a pulsing ring.',
+    category: 'Badges', kind: 'vector', keywords: ['badge', 'counter', 'notifications', 'unread'],
+  },
+  {
+    slug: 'badge-achievement-rosette', name: 'Achievement Rosette',
+    description: 'A prize rosette with pleats, a star center and a gentle bob.',
+    category: 'Badges', kind: 'vector', keywords: ['badge', 'award', 'rosette', 'achievement'],
+  },
+  {
+    slug: 'timeline-vertical', name: 'Vertical Timeline',
+    description: 'A left-rail timeline whose spine draws in with staggered events.',
+    category: 'Timelines', kind: 'vector', keywords: ['timeline', 'vertical', 'history', 'roadmap'],
+  },
+  {
+    slug: 'timeline-alternating', name: 'Alternating Timeline',
+    description: 'Events alternating sides of a center spine with slide-ins.',
+    category: 'Timelines', kind: 'vector', keywords: ['timeline', 'alternating', 'milestones'],
+  },
+  {
+    slug: 'timeline-horizontal', name: 'Horizontal Milestones',
+    description: 'A progress track with a traveller dot looping between stops.',
+    category: 'Timelines', kind: 'vector', keywords: ['timeline', 'milestones', 'phases', 'progress'],
+  },
+  {
+    slug: 'timeline-commit-log', name: 'Commit Log',
+    description: 'A git-style graph with branch curves and popping commits.',
+    category: 'Timelines', kind: 'vector', keywords: ['timeline', 'git', 'commits', 'branches'],
+  },
+  {
+    slug: 'timeline-journey', name: 'Journey Curve',
+    description: 'A winding dotted road with stops lighting up in order.',
+    category: 'Timelines', kind: 'vector', keywords: ['timeline', 'journey', 'path', 'onboarding'],
+  },
+  {
+    slug: 'timeline-gantt', name: 'Gantt Bars',
+    description: 'Task bars growing along a shared axis with a today marker.',
+    category: 'Timelines', kind: 'vector', keywords: ['timeline', 'gantt', 'tasks', 'project'],
+  },
+  {
+    slug: 'timeline-agenda', name: 'Day Agenda',
+    description: 'Schedule rows sliding in with a now-line sweeping the day.',
+    category: 'Timelines', kind: 'vector', keywords: ['timeline', 'agenda', 'schedule', 'calendar'],
+  },
+  {
+    slug: 'timeline-era-bands', name: 'Era Bands',
+    description: 'A history strip of colored era bands with boundary ticks.',
+    category: 'Timelines', kind: 'vector', keywords: ['timeline', 'eras', 'bands', 'history'],
+  },
+  {
+    slug: 'card-profile', name: 'Profile Card',
+    description: 'Avatar, stats row and a follow button with pressed state.',
+    category: 'Cards', kind: 'motion', keywords: ['card', 'profile', 'follow', 'social'],
+  },
+  {
+    slug: 'card-product', name: 'Product Card',
+    description: 'Image area, price row and an add-to-cart micro-interaction.',
+    category: 'Cards', kind: 'motion', keywords: ['card', 'product', 'shop', 'cart'],
+  },
+  {
+    slug: 'card-stat', name: 'Stat Card',
+    description: 'A KPI tile with a delta arrow and a self-drawing sparkline.',
+    category: 'Cards', kind: 'motion', keywords: ['card', 'kpi', 'stat', 'dashboard'],
+  },
+  {
+    slug: 'card-testimonial', name: 'Testimonial Card',
+    description: 'A quote card with stars and a slow typing reveal.',
+    category: 'Cards', kind: 'motion', keywords: ['card', 'testimonial', 'quote', 'review'],
+  },
+  {
+    slug: 'card-article', name: 'Article Card',
+    description: 'An editorial card with a reading-time ring and hover lift.',
+    category: 'Cards', kind: 'motion', keywords: ['card', 'article', 'blog', 'editorial'],
+  },
+  {
+    slug: 'card-team', name: 'Team Card',
+    description: 'An avatar trio that fans out on hover with a join CTA.',
+    category: 'Cards', kind: 'motion', keywords: ['card', 'team', 'members', 'group'],
+  },
+  {
+    slug: 'card-notification', name: 'Notification Card',
+    description: 'A toast stack where new notifications slide in on top.',
+    category: 'Cards', kind: 'motion', keywords: ['card', 'toast', 'notifications', 'feed'],
+  },
+  {
+    slug: 'card-login', name: 'Login Card',
+    description: 'A glass sign-in card with focus glow and a loading submit.',
+    category: 'Cards', kind: 'motion', keywords: ['card', 'login', 'auth', 'glass'],
+  },
+  {
+    slug: 'pricing-tiers', name: 'Pricing Tiers',
+    description: 'Three plans with a highlighted featured tier and hover lift.',
+    category: 'Pricing', kind: 'motion', keywords: ['pricing', 'plans', 'tiers', 'table'],
+  },
+  {
+    slug: 'pricing-billing-toggle', name: 'Billing Toggle',
+    description: 'A monthly/yearly switch that flips and re-prices with animation.',
+    category: 'Pricing', kind: 'motion', keywords: ['pricing', 'toggle', 'billing', 'switch'],
+  },
+  {
+    slug: 'pricing-feature-table', name: 'Feature Table',
+    description: 'A compare matrix with checkmarks popping in per cell.',
+    category: 'Pricing', kind: 'motion', keywords: ['pricing', 'compare', 'features', 'matrix'],
+  },
+  {
+    slug: 'pricing-hero', name: 'Pricing Hero',
+    description: 'A single focused plan card with an animated price count-up.',
+    category: 'Pricing', kind: 'motion', keywords: ['pricing', 'hero', 'plan', 'cta'],
+  },
+  {
+    slug: 'pricing-addon-picker', name: 'Add-on Picker',
+    description: 'Toggleable add-on chips that bump a live running total.',
+    category: 'Pricing', kind: 'motion', keywords: ['pricing', 'addons', 'chips', 'total'],
+  },
+  {
+    slug: 'pricing-coupon', name: 'Coupon Input',
+    description: 'A promo field that validates, shakes on failure and bursts confetti on success.',
+    category: 'Pricing', kind: 'motion', keywords: ['pricing', 'coupon', 'promo', 'discount'],
+  },
+  {
+    slug: 'pricing-invoice', name: 'Invoice Card',
+    description: 'A line-item bill that totals itself, then stamps PAID.',
+    category: 'Pricing', kind: 'motion', keywords: ['pricing', 'invoice', 'bill', 'receipt'],
+  },
+  {
+    slug: 'pricing-currency', name: 'Currency Switcher',
+    description: 'A segmented control that rolls prices across currencies.',
+    category: 'Pricing', kind: 'motion', keywords: ['pricing', 'currency', 'segmented', 'i18n'],
+  },
+  // ---- New sections: Overlays, Empty States, Tables, Tooltips ----
+  {
+    slug: 'overlay-modal', name: 'Modal',
+    description: 'A glass dialog popping over a dimmed backdrop with spring scale.',
+    category: 'Overlays', kind: 'motion', keywords: ['overlay', 'modal', 'dialog', 'confirm'],
+  },
+  {
+    slug: 'overlay-command-palette', name: 'Command Palette',
+    description: 'A ⌘K launcher with live fuzzy filter and keyboard navigation.',
+    category: 'Overlays', kind: 'motion', keywords: ['overlay', 'command', 'palette', 'kbar', 'search'],
+  },
+  {
+    slug: 'overlay-popover', name: 'Popover',
+    description: 'An anchored info card with an arrow, flipping placement.',
+    category: 'Overlays', kind: 'motion', keywords: ['overlay', 'popover', 'anchor', 'info'],
+  },
+  {
+    slug: 'overlay-drawer', name: 'Drawer',
+    description: 'A right-side activity panel sliding over a scrim, ESC to close.',
+    category: 'Overlays', kind: 'motion', keywords: ['overlay', 'drawer', 'panel', 'sidebar'],
+  },
+  {
+    slug: 'overlay-snackbar', name: 'Snackbar',
+    description: 'A bottom toast with an action button and a draining timer bar.',
+    category: 'Overlays', kind: 'motion', keywords: ['overlay', 'toast', 'snackbar', 'undo'],
+  },
+  {
+    slug: 'overlay-confirm-dialog', name: 'Confirm Dialog',
+    description: 'A destructive confirm gated behind typing a keyword.',
+    category: 'Overlays', kind: 'motion', keywords: ['overlay', 'confirm', 'danger', 'delete'],
+  },
+  {
+    slug: 'overlay-lightbox', name: 'Lightbox',
+    description: 'Click a thumbnail to zoom it full-screen over a fading backdrop.',
+    category: 'Overlays', kind: 'motion', keywords: ['overlay', 'lightbox', 'zoom', 'gallery'],
+  },
+  {
+    slug: 'overlay-context-menu', name: 'Context Menu',
+    description: 'A right-click menu with icons, separators and a danger item.',
+    category: 'Overlays', kind: 'motion', keywords: ['overlay', 'context', 'right-click', 'menu'],
+  },
+  {
+    slug: 'empty-inbox', name: 'Empty Inbox',
+    description: 'An open mailbox with drifting motes and an all-clear check.',
+    category: 'Empty States', kind: 'vector', keywords: ['empty', 'inbox', 'mail', 'zero'],
+  },
+  {
+    slug: 'empty-search', name: 'Empty Search',
+    description: 'A magnifier sweeping the dunes over a no-results note.',
+    category: 'Empty States', kind: 'vector', keywords: ['empty', 'search', 'no results'],
+  },
+  {
+    slug: 'empty-cart', name: 'Empty Cart',
+    description: 'A shopping cart with a tumbleweed rolling through.',
+    category: 'Empty States', kind: 'vector', keywords: ['empty', 'cart', 'shop', 'commerce'],
+  },
+  {
+    slug: 'empty-404', name: 'Error 404',
+    description: 'Ghosted 404 digits with a drifting astronaut on a tether.',
+    category: 'Empty States', kind: 'vector', keywords: ['empty', '404', 'error', 'not found'],
+  },
+  {
+    slug: 'empty-folder', name: 'Empty Folder',
+    description: 'A manila folder breathing its flap, waiting for files.',
+    category: 'Empty States', kind: 'vector', keywords: ['empty', 'folder', 'files', 'drive'],
+  },
+  {
+    slug: 'empty-offline', name: 'Offline State',
+    description: 'An unplugged cable with a sparking gap and retry hint.',
+    category: 'Empty States', kind: 'vector', keywords: ['empty', 'offline', 'connection', 'network'],
+  },
+  {
+    slug: 'empty-notifications', name: 'Empty Notifications',
+    description: 'A sleeping bell drifting soft zzz letters.',
+    category: 'Empty States', kind: 'vector', keywords: ['empty', 'notifications', 'bell', 'sleep'],
+  },
+  {
+    slug: 'empty-crash', name: 'Error Crash',
+    description: 'A friendly bug on a cracked screen line with a rollback note.',
+    category: 'Empty States', kind: 'vector', keywords: ['empty', 'error', 'crash', 'bug'],
+  },
+  {
+    slug: 'table-sortable', name: 'Sortable Table',
+    description: 'Click headers to sort with animated direction arrows.',
+    category: 'Tables', kind: 'motion', keywords: ['table', 'sort', 'data', 'grid'],
+  },
+  {
+    slug: 'table-selectable', name: 'Selectable Table',
+    description: 'Row checkboxes with a sliding bulk-action bar.',
+    category: 'Tables', kind: 'motion', keywords: ['table', 'select', 'bulk', 'checkbox'],
+  },
+  {
+    slug: 'table-expandable', name: 'Expandable Table',
+    description: 'Rows unfolding extra detail with a rotating chevron.',
+    category: 'Tables', kind: 'motion', keywords: ['table', 'expand', 'accordion', 'detail'],
+  },
+  {
+    slug: 'table-skeleton', name: 'Skeleton Table',
+    description: 'Shimmer rows that resolve into real data after a beat.',
+    category: 'Tables', kind: 'motion', keywords: ['table', 'skeleton', 'loading', 'shimmer'],
+  },
+  {
+    slug: 'table-sparkline-rows', name: 'Sparkline Rows',
+    description: 'A table where each row carries its own inline trend chart.',
+    category: 'Tables', kind: 'motion', keywords: ['table', 'sparkline', 'trend', 'metrics'],
+  },
+  {
+    slug: 'table-inline-edit', name: 'Inline Edit Table',
+    description: 'Double-click any cell to edit, Enter saves, Escape reverts.',
+    category: 'Tables', kind: 'motion', keywords: ['table', 'edit', 'inline', 'spreadsheet'],
+  },
+  {
+    slug: 'tooltip-follow', name: 'Follow Tooltip',
+    description: 'A tooltip trailing the cursor with soft lerp lag.',
+    category: 'Tooltips', kind: 'motion', keywords: ['tooltip', 'cursor', 'follow', 'trail'],
+  },
+  {
+    slug: 'tooltip-hotkey', name: 'Hotkey Tooltip',
+    description: 'Hovering a button reveals its keyboard shortcut combo.',
+    category: 'Tooltips', kind: 'motion', keywords: ['tooltip', 'hotkey', 'shortcut', 'keyboard'],
+  },
+  {
+    slug: 'tooltip-rich', name: 'Rich Tooltip',
+    description: 'A title + body + link card with hover-intent delay.',
+    category: 'Tooltips', kind: 'motion', keywords: ['tooltip', 'rich', 'card', 'detail'],
+  },
+  {
+    slug: 'tooltip-anchor', name: 'Anchor Tooltip',
+    description: 'One target demonstrating all four tooltip placements.',
+    category: 'Tooltips', kind: 'motion', keywords: ['tooltip', 'placement', 'anchor', 'positions'],
+  },
+  {
+    slug: 'tooltip-copy', name: 'Copy Tooltip',
+    description: 'Click-to-copy that confirms with a Copied! morph.',
+    category: 'Tooltips', kind: 'motion', keywords: ['tooltip', 'copy', 'clipboard', 'feedback'],
+  },
+  {
+    slug: 'tooltip-avatar-stack', name: 'Avatar Tooltip',
+    description: 'Hovering a stacked avatar reveals each member name.',
+    category: 'Tooltips', kind: 'motion', keywords: ['tooltip', 'avatar', 'stack', 'team'],
+  },
 ];
 
 export const categories: ElementCategory[] = [
@@ -12683,6 +12993,14 @@ export const categories: ElementCategory[] = [
   'Forms',
   'Nav',
   'Dividers',
+  'Badges',
+  'Timelines',
+  'Cards',
+  'Pricing',
+  'Overlays',
+  'Empty States',
+  'Tables',
+  'Tooltips',
   'Objects',
   'Heroes',
   'Vector',

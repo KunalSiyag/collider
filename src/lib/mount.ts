@@ -41,6 +41,80 @@ type Factory = (container: HTMLElement, options?: Record<string, unknown>) => Di
 /* slug -> lazy module loader. Every dynamic import here becomes a separate
  * chunk in the build. Keep keys in sync with registry.ts slugs. */
 const loaders: Record<string, () => Promise<Factory>> = {
+  // Overlay, table and tooltip factories.
+  'overlay-modal': async () =>
+    (await import('../overlays/overlay-modal')).createModal as unknown as Factory,
+  'overlay-command-palette': async () =>
+    (await import('../overlays/overlay-command-palette')).createCommandPalette as unknown as Factory,
+  'overlay-popover': async () =>
+    (await import('../overlays/overlay-popover')).createPopover as unknown as Factory,
+  'overlay-drawer': async () =>
+    (await import('../overlays/overlay-drawer')).createDrawer as unknown as Factory,
+  'overlay-snackbar': async () =>
+    (await import('../overlays/overlay-snackbar')).createSnackbar as unknown as Factory,
+  'overlay-confirm-dialog': async () =>
+    (await import('../overlays/overlay-confirm-dialog')).createConfirmDialog as unknown as Factory,
+  'overlay-lightbox': async () =>
+    (await import('../overlays/overlay-lightbox')).createLightbox as unknown as Factory,
+  'overlay-context-menu': async () =>
+    (await import('../overlays/overlay-context-menu')).createContextContextMenu as unknown as Factory,
+  'table-sortable': async () =>
+    (await import('../tables/table-sortable')).createSortableTable as unknown as Factory,
+  'table-selectable': async () =>
+    (await import('../tables/table-selectable')).createSelectableTable as unknown as Factory,
+  'table-expandable': async () =>
+    (await import('../tables/table-expandable')).createExpandableTable as unknown as Factory,
+  'table-skeleton': async () =>
+    (await import('../tables/table-skeleton')).createSkeletonTable as unknown as Factory,
+  'table-sparkline-rows': async () =>
+    (await import('../tables/table-sparkline-rows')).createSparklineRows as unknown as Factory,
+  'table-inline-edit': async () =>
+    (await import('../tables/table-inline-edit')).createInlineEditTable as unknown as Factory,
+  'tooltip-follow': async () =>
+    (await import('../tooltips/tooltip-follow')).createFollowTooltip as unknown as Factory,
+  'tooltip-hotkey': async () =>
+    (await import('../tooltips/tooltip-hotkey')).createHotkeyTooltip as unknown as Factory,
+  'tooltip-rich': async () =>
+    (await import('../tooltips/tooltip-rich')).createRichTooltip as unknown as Factory,
+  'tooltip-anchor': async () =>
+    (await import('../tooltips/tooltip-anchor')).createAnchorTooltip as unknown as Factory,
+  'tooltip-copy': async () =>
+    (await import('../tooltips/tooltip-copy')).createCopyTooltip as unknown as Factory,
+  'tooltip-avatar-stack': async () =>
+    (await import('../tooltips/tooltip-avatar-stack')).createAvatarTooltip as unknown as Factory,
+  // Cards and pricing factories.
+  'card-profile': async () =>
+    (await import('../cards/card-profile')).createProfileCard as unknown as Factory,
+  'card-product': async () =>
+    (await import('../cards/card-product')).createProductCard as unknown as Factory,
+  'card-stat': async () =>
+    (await import('../cards/card-stat')).createStatCard as unknown as Factory,
+  'card-testimonial': async () =>
+    (await import('../cards/card-testimonial')).createTestimonialCard as unknown as Factory,
+  'card-article': async () =>
+    (await import('../cards/card-article')).createArticleCard as unknown as Factory,
+  'card-team': async () =>
+    (await import('../cards/card-team')).createTeamCard as unknown as Factory,
+  'card-notification': async () =>
+    (await import('../cards/card-notification')).createNotificationCard as unknown as Factory,
+  'card-login': async () =>
+    (await import('../cards/card-login')).createLoginCard as unknown as Factory,
+  'pricing-tiers': async () =>
+    (await import('../pricing/pricing-tiers')).createPricingTiers as unknown as Factory,
+  'pricing-billing-toggle': async () =>
+    (await import('../pricing/pricing-billing-toggle')).createBillingToggle as unknown as Factory,
+  'pricing-feature-table': async () =>
+    (await import('../pricing/pricing-feature-table')).createFeatureTable as unknown as Factory,
+  'pricing-hero': async () =>
+    (await import('../pricing/pricing-hero')).createPricingHero as unknown as Factory,
+  'pricing-addon-picker': async () =>
+    (await import('../pricing/pricing-addon-picker')).createAddonPicker as unknown as Factory,
+  'pricing-coupon': async () =>
+    (await import('../pricing/pricing-coupon')).createCouponInput as unknown as Factory,
+  'pricing-invoice': async () =>
+    (await import('../pricing/pricing-invoice')).createInvoiceCard as unknown as Factory,
+  'pricing-currency': async () =>
+    (await import('../pricing/pricing-currency')).createCurrencySwitcher as unknown as Factory,
   // Forms and nav factories.
   'form-floating-label': async () =>
     (await import('../forms/form-floating-label')).createFloatingLabelInput as unknown as Factory,

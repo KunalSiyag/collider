@@ -117,6 +117,34 @@ import { createPulseLine } from '../dividers/divider-pulse-line';
 import { createRibbonSwoosh } from '../dividers/divider-ribbon-swoosh';
 import { createSkylineDivider } from '../dividers/divider-skyline';
 
+// Badges and timelines (pure SVG generators).
+import { createStatusBadge } from '../badges/badge-status';
+import { createVerifiedBadge } from '../badges/badge-verified';
+import { createLiveIndicator } from '../badges/badge-live';
+import { createLevelMedal } from '../badges/badge-level-medal';
+import { createPriceTag } from '../badges/badge-price-tag';
+import { createBetaPill } from '../badges/badge-beta-pill';
+import { createCountBadge } from '../badges/badge-count';
+import { createAchievementRosette } from '../badges/badge-achievement-rosette';
+import { createVerticalTimeline } from '../timelines/timeline-vertical';
+import { createAlternatingTimeline } from '../timelines/timeline-alternating';
+import { createHorizontalMilestones } from '../timelines/timeline-horizontal';
+import { createCommitLog } from '../timelines/timeline-commit-log';
+import { createJourneyCurve } from '../timelines/timeline-journey';
+import { createGanttBars } from '../timelines/timeline-gantt';
+import { createDayAgenda } from '../timelines/timeline-agenda';
+import { createEraBands } from '../timelines/timeline-era-bands';
+
+// Empty states (pure SVG generators).
+import { createEmptyInbox } from '../empties/empty-inbox';
+import { createEmptySearch } from '../empties/empty-search';
+import { createEmptyCart } from '../empties/empty-cart';
+import { createError404 } from '../empties/empty-404';
+import { createEmptyFolder } from '../empties/empty-folder';
+import { createOfflineState } from '../empties/empty-offline';
+import { createEmptyNotifications } from '../empties/empty-notifications';
+import { createErrorCrash } from '../empties/empty-crash';
+
 import { createIsoCubes } from '../isometric/iso-cube';
 import { createIsoTower } from '../isometric/iso-tower';
 import { createIsoServer } from '../isometric/iso-server';
@@ -1793,6 +1821,46 @@ import s_nav_rail from '../navs/nav-rail.ts?raw';
 import s_nav_dots_pager from '../navs/nav-dots-pager.ts?raw';
 import s_nav_burger_morph from '../navs/nav-burger-morph.ts?raw';
 
+// Cards and pricing factories.
+import s_card_profile from '../cards/card-profile.ts?raw';
+import s_card_product from '../cards/card-product.ts?raw';
+import s_card_stat from '../cards/card-stat.ts?raw';
+import s_card_testimonial from '../cards/card-testimonial.ts?raw';
+import s_card_article from '../cards/card-article.ts?raw';
+import s_card_team from '../cards/card-team.ts?raw';
+import s_card_notification from '../cards/card-notification.ts?raw';
+import s_card_login from '../cards/card-login.ts?raw';
+import s_pricing_tiers from '../pricing/pricing-tiers.ts?raw';
+import s_pricing_billing_toggle from '../pricing/pricing-billing-toggle.ts?raw';
+import s_pricing_feature_table from '../pricing/pricing-feature-table.ts?raw';
+import s_pricing_hero from '../pricing/pricing-hero.ts?raw';
+import s_pricing_addon_picker from '../pricing/pricing-addon-picker.ts?raw';
+import s_pricing_coupon from '../pricing/pricing-coupon.ts?raw';
+import s_pricing_invoice from '../pricing/pricing-invoice.ts?raw';
+import s_pricing_currency from '../pricing/pricing-currency.ts?raw';
+
+// Overlay and tooltip factories.
+import s_overlay_modal from '../overlays/overlay-modal.ts?raw';
+import s_overlay_command_palette from '../overlays/overlay-command-palette.ts?raw';
+import s_overlay_popover from '../overlays/overlay-popover.ts?raw';
+import s_overlay_drawer from '../overlays/overlay-drawer.ts?raw';
+import s_overlay_snackbar from '../overlays/overlay-snackbar.ts?raw';
+import s_overlay_confirm_dialog from '../overlays/overlay-confirm-dialog.ts?raw';
+import s_overlay_lightbox from '../overlays/overlay-lightbox.ts?raw';
+import s_overlay_context_menu from '../overlays/overlay-context-menu.ts?raw';
+import s_table_sortable from '../tables/table-sortable.ts?raw';
+import s_table_selectable from '../tables/table-selectable.ts?raw';
+import s_table_expandable from '../tables/table-expandable.ts?raw';
+import s_table_skeleton from '../tables/table-skeleton.ts?raw';
+import s_table_sparkline_rows from '../tables/table-sparkline-rows.ts?raw';
+import s_table_inline_edit from '../tables/table-inline-edit.ts?raw';
+import s_tooltip_follow from '../tooltips/tooltip-follow.ts?raw';
+import s_tooltip_hotkey from '../tooltips/tooltip-hotkey.ts?raw';
+import s_tooltip_rich from '../tooltips/tooltip-rich.ts?raw';
+import s_tooltip_anchor from '../tooltips/tooltip-anchor.ts?raw';
+import s_tooltip_copy from '../tooltips/tooltip-copy.ts?raw';
+import s_tooltip_avatar_stack from '../tooltips/tooltip-avatar-stack.ts?raw';
+
 export const sources: Record<string, string> = {
   'particle-field': particleField,
   'wave-plane': wavePlane,
@@ -1904,6 +1972,30 @@ export const sources: Record<string, string> = {
   'divider-pulse-line': createPulseLine(),
   'divider-ribbon-swoosh': createRibbonSwoosh(),
   'divider-skyline': createSkylineDivider(),
+  'badge-status': createStatusBadge(),
+  'badge-verified': createVerifiedBadge(),
+  'badge-live': createLiveIndicator(),
+  'badge-level-medal': createLevelMedal(),
+  'badge-price-tag': createPriceTag(),
+  'badge-beta-pill': createBetaPill(),
+  'badge-count': createCountBadge(),
+  'badge-achievement-rosette': createAchievementRosette(),
+  'timeline-vertical': createVerticalTimeline(),
+  'timeline-alternating': createAlternatingTimeline(),
+  'timeline-horizontal': createHorizontalMilestones(),
+  'timeline-commit-log': createCommitLog(),
+  'timeline-journey': createJourneyCurve(),
+  'timeline-gantt': createGanttBars(),
+  'timeline-agenda': createDayAgenda(),
+  'timeline-era-bands': createEraBands(),
+  'empty-inbox': createEmptyInbox(),
+  'empty-search': createEmptySearch(),
+  'empty-cart': createEmptyCart(),
+  'empty-404': createError404(),
+  'empty-folder': createEmptyFolder(),
+  'empty-offline': createOfflineState(),
+  'empty-notifications': createEmptyNotifications(),
+  'empty-crash': createErrorCrash(),
   'iso-cube': createIsoCubes(),
   'iso-tower': createIsoTower(),
   'iso-server': createIsoServer(),
@@ -3559,6 +3651,42 @@ export const sources: Record<string, string> = {
   "nav-rail": s_nav_rail,
   "nav-dots-pager": s_nav_dots_pager,
   "nav-burger-morph": s_nav_burger_morph,
+  "card-profile": s_card_profile,
+  "card-product": s_card_product,
+  "card-stat": s_card_stat,
+  "card-testimonial": s_card_testimonial,
+  "card-article": s_card_article,
+  "card-team": s_card_team,
+  "card-notification": s_card_notification,
+  "card-login": s_card_login,
+  "pricing-tiers": s_pricing_tiers,
+  "pricing-billing-toggle": s_pricing_billing_toggle,
+  "pricing-feature-table": s_pricing_feature_table,
+  "pricing-hero": s_pricing_hero,
+  "pricing-addon-picker": s_pricing_addon_picker,
+  "pricing-coupon": s_pricing_coupon,
+  "pricing-invoice": s_pricing_invoice,
+  "pricing-currency": s_pricing_currency,
+  "overlay-modal": s_overlay_modal,
+  "overlay-command-palette": s_overlay_command_palette,
+  "overlay-popover": s_overlay_popover,
+  "overlay-drawer": s_overlay_drawer,
+  "overlay-snackbar": s_overlay_snackbar,
+  "overlay-confirm-dialog": s_overlay_confirm_dialog,
+  "overlay-lightbox": s_overlay_lightbox,
+  "overlay-context-menu": s_overlay_context_menu,
+  "table-sortable": s_table_sortable,
+  "table-selectable": s_table_selectable,
+  "table-expandable": s_table_expandable,
+  "table-skeleton": s_table_skeleton,
+  "table-sparkline-rows": s_table_sparkline_rows,
+  "table-inline-edit": s_table_inline_edit,
+  "tooltip-follow": s_tooltip_follow,
+  "tooltip-hotkey": s_tooltip_hotkey,
+  "tooltip-rich": s_tooltip_rich,
+  "tooltip-anchor": s_tooltip_anchor,
+  "tooltip-copy": s_tooltip_copy,
+  "tooltip-avatar-stack": s_tooltip_avatar_stack,
 };
 
 export function getSource(slug: string): string {
@@ -4399,4 +4527,40 @@ export const factoryNames: Record<string, string> = {
   "nav-rail": "createRailNav",
   "nav-dots-pager": "createDotsPager",
   "nav-burger-morph": "createBurgerMorph",
+  "card-profile": "createProfileCard",
+  "card-product": "createProductCard",
+  "card-stat": "createStatCard",
+  "card-testimonial": "createTestimonialCard",
+  "card-article": "createArticleCard",
+  "card-team": "createTeamCard",
+  "card-notification": "createNotificationCard",
+  "card-login": "createLoginCard",
+  "pricing-tiers": "createPricingTiers",
+  "pricing-billing-toggle": "createBillingToggle",
+  "pricing-feature-table": "createFeatureTable",
+  "pricing-hero": "createPricingHero",
+  "pricing-addon-picker": "createAddonPicker",
+  "pricing-coupon": "createCouponInput",
+  "pricing-invoice": "createInvoiceCard",
+  "pricing-currency": "createCurrencySwitcher",
+  "overlay-modal": "createModal",
+  "overlay-command-palette": "createCommandPalette",
+  "overlay-popover": "createPopover",
+  "overlay-drawer": "createDrawer",
+  "overlay-snackbar": "createSnackbar",
+  "overlay-confirm-dialog": "createConfirmDialog",
+  "overlay-lightbox": "createLightbox",
+  "overlay-context-menu": "createContextContextMenu",
+  "table-sortable": "createSortableTable",
+  "table-selectable": "createSelectableTable",
+  "table-expandable": "createExpandableTable",
+  "table-skeleton": "createSkeletonTable",
+  "table-sparkline-rows": "createSparklineRows",
+  "table-inline-edit": "createInlineEditTable",
+  "tooltip-follow": "createFollowTooltip",
+  "tooltip-hotkey": "createHotkeyTooltip",
+  "tooltip-rich": "createRichTooltip",
+  "tooltip-anchor": "createAnchorTooltip",
+  "tooltip-copy": "createCopyTooltip",
+  "tooltip-avatar-stack": "createAvatarTooltip",
 };
